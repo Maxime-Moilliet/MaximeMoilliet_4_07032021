@@ -1,0 +1,14 @@
+{
+  "name": "p6_moilliet_maxime",
+  "version": "1.0.0",
+  "description": "FishEye",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maxime-Moilliet",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.32.8"
+  }
+}
