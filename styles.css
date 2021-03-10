@@ -55,4 +55,351 @@ a {
   color: inherit;
 }
 
+.main__container, .main, .cardPhotographer__tags, .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  justify-content: space-between;
+  padding-top: 40px;
+  padding-right: 22px;
+  padding-left: 22px;
+  flex-wrap: wrap;
+}
+.header__logo {
+  width: 150px;
+  height: 40px;
+}
+.header__tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.header__tags > * + * {
+  margin-left: 5px;
+}
+.header__title {
+  font-size: 1.4rem;
+}
+@media only screen and (min-width: 500px) {
+  .header .header__title {
+    font-size: 2rem;
+  }
+}
+@media only screen and (min-width: 700px) {
+  .header .header__tags {
+    margin-top: 10px;
+    order: 1;
+  }
+  .header .header__title {
+    order: 2;
+    white-space: nowrap;
+  }
+}
+@media only screen and (min-width: 970px) {
+  .header .header__tags {
+    margin-top: -6px;
+  }
+  .header .header__tags .tag__item {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (min-width: 1050px) {
+  .header .header__title {
+    font-size: 2.7rem;
+  }
+  .header .header__logo {
+    width: 17rem;
+    height: 4.5rem;
+  }
+  .header .header__tags .tag__item {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .header .header__title {
+    font-size: 3.6rem;
+  }
+  .header .header__logo {
+    width: 20rem;
+    height: 5rem;
+  }
+}
+
+@media only screen and (max-width: 312px) {
+  .header__title {
+    margin-top: 10px;
+  }
+}
+@media only screen and (min-width: 700px) {
+  .header {
+    flex-wrap: nowrap;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+@media only screen and (min-width: 1320px) {
+  .header {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+.tag__item {
+  padding: 3px 7px;
+  border: 0.5px solid #c4c4c4;
+  border-radius: 11px;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+  margin-top: 6px;
+  transition: 0.3s all;
+}
+.tag__item:hover {
+  color: #ffffff;
+  background-color: #901C1C;
+  border-color: #901C1C;
+}
+
+.cardPhotographer {
+  max-width: 300px;
+  text-align: center;
+}
+.cardPhotographer__img {
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.cardPhotographer__name {
+  font-size: 3.6rem;
+  line-height: 4.7rem;
+  margin-top: 20px;
+  color: #D3573C;
+}
+.cardPhotographer__location {
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  margin-bottom: 3px;
+}
+.cardPhotographer__description {
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  margin-bottom: 3px;
+}
+.cardPhotographer__price {
+  color: #757575;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  margin-bottom: 6px;
+}
+.cardPhotographer__tags {
+  flex-wrap: wrap;
+  margin-top: -12px;
+}
+.cardPhotographer__tags > * + * {
+  margin-left: 5px;
+}
+.cardPhotographer__tags li {
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 28px 23px;
+  background-color: #901C1C;
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.btn:hover, .btn:focus {
+  background-color: #DB8876;
+  color: #000;
+}
+
+.banner {
+  margin-top: 40px;
+  margin-bottom: 75px;
+  margin-right: 20px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.banner__header {
+  display: flex;
+  align-items: flex-start;
+}
+.banner__header > * + * {
+  margin-left: 20px;
+}
+.banner__header button {
+  display: none;
+}
+.banner__title {
+  color: #D3573C;
+  font-size: 3.6rem;
+}
+.banner__location {
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+.banner__description {
+  color: #757575;
+  font-size: 1.3rem;
+  margin-top: 5px;
+}
+.banner__img {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.banner__tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+.banner__tags > * {
+  margin-top: 12px;
+  margin-right: 5px;
+}
+@media only screen and (min-width: 550px) {
+  .banner__header button {
+    display: flex;
+    padding: 10px 12px;
+    font-size: 1.3rem;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .banner {
+    margin-right: 80px;
+    margin-left: 80px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 5px;
+  }
+}
+@media only screen and (min-width: 900px) {
+  .banner__header > * + * {
+    margin-left: 70px;
+  }
+  .banner__header button {
+    display: flex;
+    padding: 18px 22px;
+    font-size: 1.6rem;
+  }
+  .banner__title {
+    font-size: 5rem;
+  }
+  .banner__location, .banner__description {
+    font-size: 1.8rem;
+  }
+  .banner__location {
+    margin-top: 15px;
+  }
+  .banner__description {
+    margin-top: 7px;
+  }
+  .banner__tags {
+    margin-top: 10px;
+  }
+  .banner__img {
+    width: 150px;
+    height: 150px;
+  }
+  .banner__tags .tag__item {
+    font-size: 1.4rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .banner {
+    margin-right: 100px;
+    margin-left: 100px;
+    padding: 50px;
+  }
+  .banner__header > * + * {
+    margin-left: 120px;
+  }
+  .banner__title {
+    font-size: 6.4rem;
+  }
+  .banner__location, .banner__description {
+    font-size: 2.4rem;
+  }
+  .banner__img {
+    width: 200px;
+    height: 200px;
+  }
+  .banner__tags .tag__item {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .banner {
+    margin-top: 60px;
+    margin-right: 200px;
+    margin-left: 200px;
+  }
+  .banner__header > * + * {
+    margin-left: 150px;
+  }
+  .banner__header button {
+    display: flex;
+    padding: 23px 28px;
+    font-size: 1.8rem;
+  }
+  .banner__title {
+    font-size: 7rem;
+  }
+  .banner__location, .banner__description {
+    font-size: 2.7rem;
+  }
+  .banner__location {
+    margin-top: 30px;
+  }
+  .banner__description {
+    margin-top: 12px;
+  }
+  .banner__tags {
+    margin-top: 30px;
+  }
+  .banner__img {
+    width: 250px;
+    height: 250px;
+  }
+  .banner__tags .tag__item {
+    font-size: 1.7rem;
+  }
+}
+
+.main {
+  margin: 60px 20px;
+}
+.main__container {
+  flex-wrap: wrap;
+  gap: 40px 0px;
+}
+@media only screen and (min-width: 600px) {
+  .main .main__container {
+    gap: 40px 100px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .main .main__container {
+    gap: 40px 250px;
+  }
+}
+
 /*# sourceMappingURL=styles.css.map */

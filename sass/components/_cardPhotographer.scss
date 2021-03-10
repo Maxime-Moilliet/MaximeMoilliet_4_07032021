@@ -1,0 +1,45 @@
+.cardPhotographer {
+  max-width: 300px;
+  text-align: center;
+
+  &__img {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &__name {
+    font-size: 3.6rem;
+    line-height: 4.7rem;
+    margin-top: 20px;
+    color: $color-secondary;
+  }
+  &__location {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin-bottom: 3px;
+  }
+  &__description {
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin-bottom: 3px;
+  }
+  &__price {
+    color: $color-grey-light;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    margin-bottom: 6px;
+  }
+  &__tags {
+    @extend %center;
+    flex-wrap: wrap;
+    margin-top: -12px;
+  }
+  &__tags > * + * {
+      margin-left: 5px;
+  } 
+  &__tags li {
+      margin-top: 12px;
+  }
+}

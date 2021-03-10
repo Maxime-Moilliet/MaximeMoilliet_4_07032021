@@ -1,0 +1,21 @@
+.main {
+  margin: 60px 20px;
+  @extend %center;
+
+  &__container {
+    @extend %center;
+    flex-wrap: wrap;
+    gap: 40px 0px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .main__container {
+      gap: 40px 100px;
+    }
+  }
+  @media only screen and (min-width: 1400px) {
+    .main__container {
+      gap: 40px 250px;
+    }
+  }
+}
