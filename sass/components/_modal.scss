@@ -1,0 +1,161 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(196, 196, 196, 0.4);
+  overflow: auto;
+  height: 100%;
+  z-index: 100000;
+  animation-name: openModal;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+
+  &[aria-hidden="true"] {
+    animation-name: closeModal;
+    animation-fill-mode: both;
+  }
+
+  &__container {
+    width: calc(100% - 40px);
+    height: 100%;
+    background-color: $color-secondary-light;
+    padding: 0px 20px;
+    overflow: auto;
+  }
+
+  &__title {
+    font-size: 3.6rem;
+    color: #000;
+    line-height: 4.7rem;
+    margin-bottom: 25px;
+    margin-top: 20px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__close {
+    margin-top: 20px;
+    color: #ffffff;
+    font-size: 2.5rem;
+    padding: 7px;
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.3s opacity;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__group > * + * {
+    margin-top: 6px;
+  }
+
+  &__label {
+    color: $color-grey-dark;
+    font-size: 2.4rem;
+  }
+
+  &__form {
+    width: calc(100% - 10px);
+  }
+
+  &__form * + * {
+    margin-top: 15px;
+  }
+
+  &__text,
+  &__area {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    min-height: 35px;
+    font-size: 1.7rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 7px;
+    font-family: $font;
+  }
+
+  &__submit {
+    margin-left: 50%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    padding: 6px 50px;
+
+    &:hover {
+      background-color: rgba($color: $color-primary, $alpha: 0.4);
+      color: #ffffff;
+    }
+  }
+
+  @media only screen and (min-width: 750px) {
+    &__container {
+      border-radius: 5px;
+      max-width: 650px;
+      height: auto;
+    }
+    &__submit {
+      margin-left: 0;
+      transform: translateX(0);
+      margin-top: 15px;
+    }
+  }
+  @media only screen and (min-width: 1400px) {
+    &__container {
+      overflow: visible;
+    }
+    &__title {
+      margin-top: 60px;
+      max-width: 100%;
+      font-size: 6rem;
+      line-height: 7rem;
+    }
+    &__label {
+      font-size: 3rem;
+    }
+    &__text,
+    &__area {
+      padding-top: 7px;
+      padding-bottom: 7px;
+      padding-left: 10px;
+      font-size: 2.2rem;
+    }
+    &__submit {
+      padding: 22px 50px;
+      margin-bottom: 50px;
+    }
+    &__close {
+      margin-top: 60px;
+      font-size: 3.5rem;
+    }
+  }
+}
+
+@keyframes openModal {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes closeModal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}

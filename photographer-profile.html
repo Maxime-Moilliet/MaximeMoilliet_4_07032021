@@ -22,7 +22,7 @@
         <div class="banner__left">
             <div class="banner__header">
                 <h1 class="banner__title"></h1>
-                <button class="banner__btn btn">Contactez-moi</button>
+                <button id="js-modal" class="banner__btn btn">Contactez-moi</button>
             </div>
             <div class="banner__body">
                 <p class="banner__location"></p>
@@ -38,12 +38,43 @@
     </main>
 
     <aside class="btn__contact">
-        <a class="btn" href="#">Contactez-moi</a>
+        <a id="js-modal" class="btn" href="#">Contactez-moi</a>
     </aside>
 
     <aside class="info">
         <p class="info__likes" id="js-infoLikes"></i></p>
         <p class="info__price" id="js-infoPrice"></p>
+    </aside>
+
+    <aside class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true" aria-modal="false"
+        style="display: none;">
+        <div id="js-modalContainer" class="modal__container">
+            <div class="modal__header">
+                <h1 id="modalTitle" class="modal__title">Contactez-moi <br> Mimi Keel</h1>
+                <i id="js-modalClose" class="fas fa-times modal__close"></i>
+            </div>
+            <form id="js-form" action="#" class="modal__form">
+                <div class="modal__group">
+                    <label class="modal__label" for="first">Prénom</label><br>
+                    <input class="modal__text" type="text" name="first" id="first"><br>
+                </div>
+                <div class="modal__group">
+                    <label class="modal__label" for="last">Nom</label><br>
+                    <input class="modal__text" type="text" name="last" id="last"><br>
+                </div>
+                <div class="modal__group">
+                    <label class="modal__label" for="mail">Email</label><br>
+                    <input class="modal__text" type="text" name="mail" id="mail"><br>
+                </div>
+                <div class="modal__group">
+                    <label class="modal__label" for="area">Votre message</label><br>
+                    <textarea class="modal__area" name="area" id="area" cols="30" rows="10"></textarea>
+                </div>
+                <div class="modal__group">
+                    <input class="btn modal__submit" id="js-submit" type="submit" value="Envoyer">
+                </div>
+            </form>
+        </div>
     </aside>
 
     <script type="module" src="./js/Factory.js" defer></script>

@@ -4,14 +4,15 @@
 
 @import './bases/header.scss';
 
-@import './components/lightbox';
-@import './components/infoPhotographer';
+@import './components/button';
 @import './components/loader';
 @import './components/tag';
 @import './components/cardPhotographer';
-@import './components/button';
-@import './components/bannerPhotographer';
 @import './components/cardGallery';
+@import './components/bannerPhotographer';
+@import './components/infoPhotographer';
+@import './components/lightbox';
+@import './components/modal';
 
 @import './pages/accueil';
 @import './pages/profile';
