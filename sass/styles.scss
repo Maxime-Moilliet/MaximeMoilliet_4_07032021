@@ -4,9 +4,15 @@
 
 @import './bases/header.scss';
 
+@import './components/lightbox';
+@import './components/infoPhotographer';
+@import './components/loader';
 @import './components/tag';
 @import './components/cardPhotographer';
 @import './components/button';
 @import './components/bannerPhotographer';
+@import './components/cardGallery';
 
 @import './pages/accueil';
+@import './pages/profile';
+

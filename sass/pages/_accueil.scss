@@ -1,11 +1,19 @@
 .main {
-  margin: 60px 20px;
-  @extend %center;
+  margin-bottom: 60px;
+
+  &__title {
+    font-size: 1.4rem;
+    float: right;
+    margin-top: 50px;
+    margin-right: 20px;
+    margin-bottom: 145px;
+  }
 
   &__container {
     @extend %center;
     flex-wrap: wrap;
-    gap: 40px 0px;
+    gap: 40px 200px;
+    width: 100%;
   }
 
   @media only screen and (min-width: 600px) {
@@ -13,9 +21,35 @@
       gap: 40px 100px;
     }
   }
+  @media only screen and (min-width: 620px) {
+    &__title {
+      margin-bottom: 70px;
+    }
+  }
+  @media only screen and (min-width: 1250px) {
+    &__title {
+      margin-top: 47px;
+      margin-right: 80px;
+      font-size: 2.6rem;
+    }
+  }
   @media only screen and (min-width: 1400px) {
     .main__container {
       gap: 40px 250px;
+    }
+  }
+  @media only screen and (min-width: 1500px) {
+    &__title {
+      margin-top: 47px;
+      margin-right: 100px;
+      font-size: 3.6rem;
+    }
+  }
+  @media only screen and (max-width: 370px) {
+    &__title {
+      float: left;
+      margin-top: 100px;
+      margin-left: 20px;
     }
   }
 }

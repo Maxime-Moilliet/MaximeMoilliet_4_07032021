@@ -1,94 +1,73 @@
 .header {
-  @extend %center;
-  justify-content: space-between;
-  padding-top: 40px;
-  padding-right: 22px;
-  padding-left: 22px;
-  flex-wrap: wrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
 
   &__logo {
     width: 150px;
-    height: 40px;
+    height: 38px;
+    margin-bottom: 35px;
   }
 
   &__tags {
-    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    flex-wrap: wrap;  
   }
+
   &__tags > * + * {
     margin-left: 5px;
   }
 
-  &__title {
-    font-size: 1.4rem;
-  }
-
-  @media only screen and (min-width: 500px) {
-    .header__title {
-      font-size: 2rem;
+  @media only screen and (min-width: 580px) {
+    & {
+      display: flex;
+      max-width: calc(100% - 150px);
     }
   }
-
-  @media only screen and (min-width: 700px) {
-    .header__tags {
-      margin-top: 10px;
-      order: 1;
+  @media only screen and (min-width: 850px) {
+    & {
+      width: 100%;
     }
-    .header__title {
-      order: 2;
-      white-space: nowrap;
+    &__tags {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
-  @media only screen and (min-width: 970px) {
-    .header__tags {
-      margin-top: -6px;
+  @media only screen and (min-width: 1250px) {
+    & {
+      width: calc(100% - 350px);
     }
-    .header__tags .tag__item {
-      font-size: 1.5rem;
+    &__logo {
+      width: 150px;
+      height: 40px;
+      margin-left: 80px;
     }
-  }
-  @media only screen and (min-width: 1050px) {
-    .header__title {
-      font-size: 2.7rem;
-    }
-    .header__logo {
-      width: 17rem;
-      height: 4.5rem;
-    }
-    .header__tags .tag__item {
-      font-size: 1.5rem;
+    &__tags {
+      margin-top: 3px;
     }
   }
-  @media only screen and (min-width: 1200px) {
-    .header__title {
-      font-size: 3.6rem;
+  @media only screen and (min-width: 1500px) {
+    & {
+      margin-left: 0;
     }
-    .header__logo {
-      width: 20rem;
-      height: 5rem;
+    &__logo {
+      margin-left: 100px;
+      width: 200px;
+      height: 50px;
+    }
+    &__tags {
+      margin-top: 7px;
     }
   }
-}
-@media only screen and (max-width: 312px) {
-  .header__title {
-    margin-top: 10px;
-  }
-}
-@media only screen and (min-width: 700px) {
-  .header { 
-    flex-wrap: nowrap;
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-}
-@media only screen and (min-width: 1320px) {
-  .header {
-    padding-left: 100px;
-    padding-right: 100px;
+  @media only screen and (max-width: 370px) {
+    &__logo {
+      margin-bottom: 50px;
+    }
   }
 }

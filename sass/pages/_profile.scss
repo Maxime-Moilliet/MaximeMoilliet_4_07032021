@@ -1,0 +1,39 @@
+.gallery {
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 80px;
+    @extend %center;
+    flex-wrap: wrap;
+    gap: 0px 20px;
+
+    @media only screen and (min-width: 1300px) {
+        & {
+            margin-right: 40px;
+            margin-left: 40px;
+            gap: 10px 40px;
+        }
+    }
+    @media only screen and (min-width: 1600px) {
+        & {
+            margin-right: 100px;
+            margin-left: 100px;
+            gap: 15px 150px;
+        }
+    }
+}
+
+.btn__contact a{
+    position: fixed;
+    z-index: 1000;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem;
+    padding: 6px 18px;
+
+    @media only screen and (min-width: 850px) {
+        & {
+            display: none;
+        }
+    }
+}
