@@ -81,9 +81,9 @@ class Modal {
 
   closeModal() {
     this.changeArias();
+    enableBodyScroll(this.element)
     window.setTimeout(() => {
       this.changeDisplay();
-      enableBodyScroll(this.element)
     }, 500);
     this.close.removeEventListener("click", this.closeModal);
   }

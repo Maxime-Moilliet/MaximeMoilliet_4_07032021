@@ -20,7 +20,7 @@ class Factory {
 }
 
 const url = new URL(window.location.href);
-if (url.pathname === "/photographer-profile.html") {
+if (url.pathname === "/photographer-profile.html" || url.pathname === "/MaximeMoilliet_4_07032021/photographer-profile.html") {
   const factory = new Factory();
   factory.create("PhotographerProfile");
 
