@@ -307,6 +307,25 @@ a {
   margin-top: 12px;
 }
 
+.filter {
+  margin-top: 20px;
+  margin-left: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+}
+.filter__p {
+  color: #000;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-right: 25px;
+}
+.filter__item {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 15px;
+}
+
 .cardGallery__img {
   max-width: 350px;
   width: 100%;
@@ -865,9 +884,6 @@ a {
   .btn__contact a {
     display: none;
   }
-}
-.btn__contact a.none {
-  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

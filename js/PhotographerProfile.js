@@ -1,21 +1,6 @@
 class PhotographerProfile {
-  constructor(bdd) {
+  constructor(bdd, id) {
     this.bdd = bdd;
-    const url = new URLSearchParams(window.location.search);
-    let id = null;
-
-    let idIsValid = false;
-    this.bdd.photographers.forEach((photographer) => {
-      const photographerId = photographer.id;
-      if (photographerId === parseInt(url.get("id"))) {
-        idIsValid = true;
-      }
-    });
-    if (url.get("id") == null || idIsValid === false) {
-      id = "243";
-    } else {
-      id = url.get("id");
-    }
     this.filterBdd(id);
   }
 
@@ -24,7 +9,6 @@ class PhotographerProfile {
     const medias = this.bdd.media.filter((el) => el.photographerId == id);
     this.buildBanner(photographer);
     this.buildGallery(medias);
-    this.buildInfo(medias, photographer);
   }
 
   buildBanner(photographer) {
@@ -57,7 +41,7 @@ class PhotographerProfile {
     });
   }
 
-  LoadImage(element, urlImage) {
+  LoadImage(element, urlImage, media) {
     const link = document.createElement("a");
     const image = new Image();
     const loader = document.createElement("div");
@@ -67,6 +51,7 @@ class PhotographerProfile {
     image.src = urlImage;
     image.setAttribute("id", "js-galleryImg");
     image.setAttribute("class", "cardGallery__img");
+    image.setAttribute("alt", media.alt)
     link.prepend(loader);
     image.onload = () => {
       link.prepend(image);
@@ -78,8 +63,6 @@ class PhotographerProfile {
     const gallery = document.querySelector(".gallery");
     medias.forEach((media) => {
       const card = document.createElement("article");
-      const galleryPrice = media.price;
-      const galleryLikes = media.likes;
       let galleryUrl = null;
       if (media.photographerId === 243) {
         galleryUrl = "./photos/Mimi/" + media.image;
@@ -96,27 +79,15 @@ class PhotographerProfile {
       }
       card.setAttribute("class", "cardGallery");
       card.innerHTML =
-        '<div class="cardGallery__content"><h3 class="cardGallery__title">Arc-en-ciel</h3><div class="cardGallery__body"><p class="cardGallery__price">' +
-        galleryPrice +
-        ' €</p><p class="cardGallery__likes">' +
-        galleryLikes +
-        '</p><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></div></div>';
+        '<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">' + media.title + '</h3><div class="cardGallery__body"><p class="cardGallery__price">' +
+        media.price +
+        ' €</p><p class="cardGallery__likes" id="#' + media.id + '">' +
+        media.likes +
+        '</p><a href="#' + media.id + '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
 
-      this.LoadImage(card, galleryUrl);
+      this.LoadImage(card, galleryUrl, media);
       gallery.appendChild(card);
     });
-  }
-
-  buildInfo(medias, photographer) {
-    let likes = null;
-    medias.forEach((media) => {
-      likes += media.likes;
-    });
-    const infoLikes = document.getElementById("js-infoLikes");
-    const infoPrice = document.getElementById("js-infoPrice");
-    infoLikes.innerHTML =
-      likes + ' <i class="fas fa-heart info__icon" aria-label="likes">';
-    infoPrice.innerHTML = photographer[0].price + "€ / jour";
   }
 }
 
