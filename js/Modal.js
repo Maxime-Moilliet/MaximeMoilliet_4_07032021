@@ -6,7 +6,7 @@ import {
 class Modal {
   constructor(bdd, id) {
     this.bdd = bdd;
-    this.initModal(id);
+    this.initModal(id); 
   }
 
   initModal(id) {

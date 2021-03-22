@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
     <title>FishEye</title>
 </head>
@@ -17,7 +17,7 @@
     <header class="header">
         <a href="./index.html"><img class="header__logo" src="./photos/logo/logo.png" alt="“Fisheye Home page"></a>
     </header>
-
+    
     <section class="banner">
         <div class="banner__left">
             <div class="banner__header">
@@ -33,62 +33,77 @@
         </div>
         <img class="banner__img" src="./photos/PhotographersIDPhotos/MimiKeel.jpg" alt="Mimi Keel">
     </section>
-
+    
     <section class="filter">
         <p class="filter__p">Trier par</p>
-        <form action="" id="js-filter">
-            <select class="filter_items" name="orderGallery" id="orderGallery">
-                <option class="filter__item" value="">Popularité</option>
-                <option class="filter__item" value="">Date</option>
-                <option class="filter__item" value="">Titre</option>
-            </select>
-        </form>
-    </section>
-
-    <main class="gallery">
-    </main>
-
-    <aside class="btn__contact">
-        <a id="js-modal" class="btn" href="#">Contactez-moi</a>
-    </aside>
-
-    <aside class="info">
-        <p class="info__likes" id="js-infoLikes"></i></p>
-        <p class="info__price" id="js-infoPrice"></p>
-    </aside>
-
-    <aside class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true" aria-modal="false"
-        style="display: none;">
-        <div id="js-modalContainer" class="modal__container">
-            <div class="modal__header">
-                <h1 id="modalTitle" class="modal__title">Contactez-moi <br> Mimi Keel</h1>
-                <i id="js-modalClose" class="fas fa-times modal__close"></i>
+        <div class="cont_select_center">
+            <div class="select_mate" data-mate-select="active">
+                <select name="filter" onchange="" onclick="" id="js-filter">
+                    <option value="0">Popularité</option>
+                    <option value="1">Date</option>
+                    <option value="2">Titre</option>
+                </select>
+                <p class="selecionado_opcion" onclick="open_select(this)"></p><span onclick="open_select(this)"
+                class="icon_select_mate"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                d="M1.88 10.5466L8 4.43996L14.12 10.5466L16 8.66663L8 0.66663L1.64355e-07 8.66663L1.88 10.5466Z"
+                fill="white" />
+            </svg></span>
+            <div class="cont_list_select_mate">
+                <ul class="cont_select_int" id="js-selectItems"> </ul>
             </div>
-            <form id="js-form" action="#" class="modal__form">
-                <div class="modal__group">
-                    <label class="modal__label" for="first">Prénom</label><br>
-                    <input class="modal__text" type="text" name="first" id="first"><br>
-                </div>
-                <div class="modal__group">
-                    <label class="modal__label" for="last">Nom</label><br>
-                    <input class="modal__text" type="text" name="last" id="last"><br>
-                </div>
-                <div class="modal__group">
-                    <label class="modal__label" for="mail">Email</label><br>
-                    <input class="modal__text" type="text" name="mail" id="mail"><br>
-                </div>
-                <div class="modal__group">
-                    <label class="modal__label" for="area">Votre message</label><br>
-                    <textarea class="modal__area" name="area" id="area" cols="30" rows="10"></textarea>
-                </div>
-                <div class="modal__group">
-                    <input class="btn modal__submit" id="js-submit" type="submit" value="Envoyer">
-                </div>
-            </form>
-        </div>
-    </aside>
+        </div>          
+    </div>
+</section>
 
-    <script type="module" src="./js/Factory.js" defer></script>
+<main class="gallery">
+    <div class="galleryContainer" id="js-container">
+    </div>
+</main>
+
+<aside class="btn__contact">
+    <a id="js-modal" class="btn" href="#">Contactez-moi</a>
+</aside>
+
+<aside class="info">
+    <p class="info__likes" id="js-infoLikes"></i></p>
+    <p class="info__price" id="js-infoPrice"></p>
+</aside>
+
+<aside class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true" aria-modal="false"
+style="display: none;">
+<div id="js-modalContainer" class="modal__container">
+    <div class="modal__header">
+        <h1 id="modalTitle" class="modal__title">Contactez-moi <br> Mimi Keel</h1>
+        <i id="js-modalClose" class="fas fa-times modal__close"></i>
+    </div>
+    <form id="js-form" action="#" class="modal__form">
+        <div class="modal__group">
+            <label class="modal__label" for="first">Prénom</label><br>
+            <input class="modal__text" type="text" name="first" id="first"><br>
+        </div>
+        <div class="modal__group">
+            <label class="modal__label" for="last">Nom</label><br>
+            <input class="modal__text" type="text" name="last" id="last"><br>
+        </div>
+        <div class="modal__group">
+            <label class="modal__label" for="mail">Email</label><br>
+            <input class="modal__text" type="text" name="mail" id="mail"><br>
+        </div>
+        <div class="modal__group">
+            <label class="modal__label" for="area">Votre message</label><br>
+            <textarea class="modal__area" name="area" id="area" cols="30" rows="10"></textarea>
+        </div>
+        <div class="modal__group">
+            <input class="btn modal__submit" id="js-submit" type="submit" value="Envoyer">
+        </div>
+    </form>
+</div>
+</aside>
+
+<script type="module" src="./js/Factory.js" defer></script>
+<!-- <script type="text/javascript" src="./js/customSelect.js" defer></script> -->
 </body>
 
 </html>

@@ -28,7 +28,7 @@ class Lightbox {
     this.images = images;
     this.titles = titles;
     this.alts = alts;
-    this.element = this.buildLightbox(url);
+    this.element = this.buildLightbox();
     const titleValue = this.bdd.media.filter((el) => el.alt == alt)[0].title;
     this.loadImage(url, titleValue, alt);
     document.body.appendChild(this.element);
@@ -85,7 +85,7 @@ class Lightbox {
     enableBodyScroll(this.element);
     window.setTimeout(() => {
       this.element.parentNode.removeChild(this.element);
-    }, 500);
+    }, 300);
     document.removeEventListener("keyup", this.onKeyUp);
   }
 

@@ -1,14 +1,69 @@
 class PhotographerProfile {
   constructor(bdd, id) {
     this.bdd = bdd;
+    const select = document.querySelectorAll("#js-filter");
+    let valueClicked = ["0"];
+    select.forEach((option) => {
+      addEventListener("click", () => {
+        valueClicked.push(option.value);
+        this.filterOption(option.value, valueClicked);
+      });
+    });
     this.filterBdd(id);
+  }
+
+  filterOption(optionValue, valueClicked) {
+    if (
+      valueClicked[valueClicked.length - 1] !==
+      valueClicked[valueClicked.length - 2]
+    ) {
+      let medias = null;
+      if (optionValue === "2") {
+        medias = this.medias.sort((a, b) => {
+          a = a.title;
+          b = b.title;
+          return a > b ? 1 : -1;
+        });
+        this.newGallery(medias);
+      } else if (optionValue === "1") {
+        medias = this.medias.sort((a, b) => {
+          a = new Date(a.date);
+          b = new Date(b.date);
+          return a > b ? 1 : -1;
+        });
+        this.newGallery(medias);
+      } else if (optionValue === "0") {
+        medias = this.medias.sort((a, b) => {
+          a = a.likes;
+          b = b.likes;
+          return b > a ? 1 : -1;
+        });
+        this.newGallery(medias);
+      }
+    }
+  }
+
+  newGallery(medias) {
+    const container = document.querySelector("#js-container");
+    const gallery = document.querySelector(".gallery");
+    gallery.removeChild(container);
+    const newContainer = document.createElement("div");
+    newContainer.setAttribute("class", "galleryContainer");
+    newContainer.setAttribute("id", "js-container");
+    gallery.appendChild(newContainer);
+    this.buildGallery(medias);
   }
 
   filterBdd(id) {
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
-    const medias = this.bdd.media.filter((el) => el.photographerId == id);
+    this.medias = this.bdd.media.filter((el) => el.photographerId == id);
+    this.medias.sort((a, b) => {
+      a = a.likes;
+      b = b.likes;
+      return b > a ? 1 : -1;
+    });
     this.buildBanner(photographer);
-    this.buildGallery(medias);
+    this.buildGallery(this.medias);
   }
 
   buildBanner(photographer) {
@@ -51,7 +106,7 @@ class PhotographerProfile {
     image.src = urlImage;
     image.setAttribute("id", "js-galleryImg");
     image.setAttribute("class", "cardGallery__img");
-    image.setAttribute("alt", media.alt)
+    image.setAttribute("alt", media.alt);
     link.prepend(loader);
     image.onload = () => {
       link.prepend(image);
@@ -60,7 +115,7 @@ class PhotographerProfile {
   }
 
   buildGallery(medias) {
-    const gallery = document.querySelector(".gallery");
+    const gallery = document.querySelector("#js-container");
     medias.forEach((media) => {
       const card = document.createElement("article");
       let galleryUrl = null;
@@ -79,11 +134,17 @@ class PhotographerProfile {
       }
       card.setAttribute("class", "cardGallery");
       card.innerHTML =
-        '<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">' + media.title + '</h3><div class="cardGallery__body"><p class="cardGallery__price">' +
+        '<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">' +
+        media.title +
+        '</h3><div class="cardGallery__body"><p class="cardGallery__price">' +
         media.price +
-        ' €</p><p class="cardGallery__likes" id="#' + media.id + '">' +
+        ' €</p><p class="cardGallery__likes" id="#' +
+        media.id +
+        '">' +
         media.likes +
-        '</p><a href="#' + media.id + '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
+        '</p><a href="#' +
+        media.id +
+        '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
 
       this.LoadImage(card, galleryUrl, media);
       gallery.appendChild(card);

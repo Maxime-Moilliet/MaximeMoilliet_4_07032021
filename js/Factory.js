@@ -47,6 +47,13 @@ if (
   factory.create("PhotographerProfile", id);
 
   window.onload = () => {
+    const script = document.createElement("script");
+    script.setAttribute("src", "./js/customSelect.js");
+    script.setAttribute("async", "true");
+    script.setAttribute("type", "text/javascript");
+    const elt = document.getElementsByTagName("script")[0];
+    elt.parentNode.appendChild(script);
+
     factory.create("Lightbox");
     factory.create("Modal", id);
     factory.create("Likes", id);

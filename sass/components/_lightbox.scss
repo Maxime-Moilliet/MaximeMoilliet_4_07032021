@@ -11,12 +11,12 @@
   align-items: center;
   overflow: auto;
   animation-name: lightboxIn;
-  animation-duration: .5s;
+  animation-duration: .3s;
   animation-fill-mode: both;
 
   &.lightboxOut {
     animation-name: lightboxOut;
-    animation-duration: .5s;
+    animation-duration: .3s;
     animation-fill-mode: both;
   }
 
