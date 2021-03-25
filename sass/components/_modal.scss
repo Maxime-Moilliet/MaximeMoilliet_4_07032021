@@ -48,6 +48,7 @@
     cursor: pointer;
     opacity: 1;
     transition: 0.3s opacity;
+    margin-left: auto;
 
     &:hover {
       opacity: 0.5;
@@ -56,6 +57,21 @@
 
   &__group > * + * {
     margin-top: 6px;
+  }
+
+  &__group[data-error]::after {
+    content: attr(data-error);
+    font-size: 1.5rem;
+    color: $color-primary;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  &__group[data-error-visible="true"]::after {
+    opacity: 1;
   }
 
   &__label {
@@ -92,9 +108,32 @@
     font-size: 1.8rem;
     padding: 6px 50px;
 
-    &:hover {
+    &:hover,
+    &:disabled {
       background-color: rgba($color: $color-primary, $alpha: 0.4);
       color: #ffffff;
+    }
+  }
+
+  &__formValid {
+    display: none;
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    animation-name: formValid;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+
+    h2 {
+      font-size: 3rem;
+      color: #000;
+      margin-bottom: 70px;
+    }
+
+    i {
+      color: #000;
+      font-size: 7rem;
+      margin-bottom: 100px;
     }
   }
 
@@ -157,5 +196,14 @@
   to {
     opacity: 0;
     transform: translateY(-50px);
+  }
+}
+@keyframes formValid {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
   }
 }

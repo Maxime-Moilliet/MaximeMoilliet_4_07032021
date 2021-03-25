@@ -30,7 +30,7 @@
     font-size: 0.9rem;
     line-height: 1.2rem;
     margin-bottom: 6px;
-  }
+  } 
   &__tags {
     @extend %center;
     flex-wrap: wrap;
@@ -40,6 +40,6 @@
       margin-left: 5px;
   } 
   &__tags li {
-      margin-top: 12px;
+      margin-top: 8px;
   }
 }

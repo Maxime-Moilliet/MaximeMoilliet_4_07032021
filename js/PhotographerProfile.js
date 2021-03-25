@@ -84,7 +84,7 @@ class PhotographerProfile {
     photographer[0].tags.forEach((el) => {
       let li = document.createElement("li");
       let link = document.createElement("a");
-      link.setAttribute("href", "#");
+      link.setAttribute("href", "/?tag=" + el);
       let tag = document.createElement("span");
       tag.setAttribute("class", "tag__item");
       tag.setAttribute("id", "js-tag");
