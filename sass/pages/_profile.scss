@@ -1,39 +1,73 @@
 .galleryContainer {
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-bottom: 80px;
-    @extend %center;
-    flex-wrap: wrap;
-    gap: 0px 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 80px;
+  @extend %center;
+  flex-wrap: wrap;
+  gap: 0px 20px;
 
-    @media only screen and (min-width: 1300px) {
-        & {
-            margin-right: 40px;
-            margin-left: 40px;
-            gap: 10px 40px;
-        }
+  @media only screen and (min-width: 1300px) {
+    & {
+      margin-right: 40px;
+      margin-left: 40px;
+      gap: 10px 40px;
     }
-    @media only screen and (min-width: 1600px) {
-        & {
-            margin-right: 100px;
-            margin-left: 100px;
-            gap: 15px 150px;
-        }
+  }
+  @media only screen and (min-width: 1600px) {
+    & {
+      margin-right: 100px;
+      margin-left: 100px;
+      gap: 15px 150px;
     }
+  }
 }
 
-.btn__contact a{
-    position: fixed;
-    z-index: 1000;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.6rem;
-    padding: 6px 18px;
+.btn__contact a {
+  position: fixed;
+  z-index: 1000;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.6rem;
+  padding: 6px 18px;
 
-    @media only screen and (min-width: 850px) {
-        & {
-            display: none;
-        }
+  @media only screen and (min-width: 850px) {
+    & {
+      display: none;
     }
+  }
+}
+
+.cardGallery[data-order="1"] {
+  order: 1;
+}
+.cardGallery[data-order="2"] {
+  order: 2;
+}
+.cardGallery[data-order="3"] {
+  order: 3;
+}
+.cardGallery[data-order="4"] {
+  order: 4;
+}
+.cardGallery[data-order="5"] {
+  order: 5;
+}
+.cardGallery[data-order="6"] {
+  order: 6;
+}
+.cardGallery[data-order="7"] {
+  order: 7;
+}
+.cardGallery[data-order="8"] {
+  order: 8;
+}
+.cardGallery[data-order="9"] {
+  order: 9;
+}
+.cardGallery[data-order="10"] {
+  order: 10;
+}
+.cardGallery[data-order="11"] {
+  order: 11;
 }

@@ -2,68 +2,38 @@ class PhotographerProfile {
   constructor(bdd, id) {
     this.bdd = bdd;
     const select = document.querySelectorAll("#js-filter");
-    let valueClicked = ["0"];
     select.forEach((option) => {
       addEventListener("click", () => {
-        valueClicked.push(option.value);
-        this.filterOption(option.value, valueClicked);
+        this.filterOption(option.value);
+        console.log(option.value)
       });
     });
     this.filterBdd(id);
   }
 
-  filterOption(optionValue, valueClicked) {
-    if (
-      valueClicked[valueClicked.length - 1] !==
-      valueClicked[valueClicked.length - 2]
-    ) {
-      let medias = null;
-      if (optionValue === "2") {
-        medias = this.medias.sort((a, b) => {
-          a = a.title;
-          b = b.title;
-          return a > b ? 1 : -1;
-        });
-        this.newGallery(medias);
-      } else if (optionValue === "1") {
-        medias = this.medias.sort((a, b) => {
-          a = new Date(a.date);
-          b = new Date(b.date);
-          return a > b ? 1 : -1;
-        });
-        this.newGallery(medias);
-      } else if (optionValue === "0") {
-        medias = this.medias.sort((a, b) => {
-          a = a.likes;
-          b = b.likes;
-          return b > a ? 1 : -1;
-        });
-        this.newGallery(medias);
-      }
-    }
-  }
-
-  newGallery(medias) {
-    const container = document.querySelector("#js-container");
-    const gallery = document.querySelector(".gallery");
-    gallery.removeChild(container);
-    const newContainer = document.createElement("div");
-    newContainer.setAttribute("class", "galleryContainer");
-    newContainer.setAttribute("id", "js-container");
-    gallery.appendChild(newContainer);
+  filterBdd(id) {
+    const photographer = this.bdd.photographers.filter((el) => el.id == id);
+    const medias = this.bdd.media.filter((el) => el.photographerId == id);
+    this.sortMedias(medias, "init");
+    this.buildBanner(photographer);
     this.buildGallery(medias);
   }
 
-  filterBdd(id) {
-    const photographer = this.bdd.photographers.filter((el) => el.id == id);
-    this.medias = this.bdd.media.filter((el) => el.photographerId == id);
-    this.medias.sort((a, b) => {
-      a = a.likes;
-      b = b.likes;
-      return b > a ? 1 : -1;
-    });
-    this.buildBanner(photographer);
-    this.buildGallery(this.medias);
+  filterOption(value) {
+    const cards = document.querySelectorAll(".cardGallery");
+    this.flipInit();
+    this.flipRead(cards);
+    if (value === "0") {
+      this.sortMedias(this.cards, "popularity");
+      this.ChangeGallery(this.cards);
+    } else if (value === "1") {
+      this.sortMedias(this.cards, "date");
+      this.ChangeGallery(this.cards);
+    } else if (value === "2") {
+      this.sortMedias(this.cards, "title");
+      this.ChangeGallery(this.cards);
+    }
+    this.flipPlay(this.cards);
   }
 
   buildBanner(photographer) {
@@ -115,9 +85,14 @@ class PhotographerProfile {
   }
 
   buildGallery(medias) {
-    const gallery = document.querySelector("#js-container");
-    medias.forEach((media) => {
+    this.cards = [];
+    medias.forEach((media, i) => {
       const card = document.createElement("article");
+      card.setAttribute("id", media.id);
+      card.setAttribute("data-order", i);
+      card.setAttribute("data-title", media.title);
+      card.setAttribute("data-likes", media.likes);
+      card.setAttribute("data-date", media.date);
       let galleryUrl = null;
       if (media.photographerId === 243) {
         galleryUrl = "./photos/Mimi/" + media.image;
@@ -147,7 +122,82 @@ class PhotographerProfile {
         '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
 
       this.LoadImage(card, galleryUrl, media);
+      this.cards.push(card);
+    });
+    const gallery = document.querySelector("#js-container");
+    this.cards.forEach((card) => {
       gallery.appendChild(card);
+    });
+  }
+
+  ChangeGallery(gallery) {
+    gallery.forEach((media, i) => {
+      this.cards[i].dataset.order = i;
+    });
+  }
+
+  sortMedias(array, text) {
+    if (text === "init") {
+      return array.sort((a, b) => {
+        a = a.likes;
+        b = b.likes;
+        return b > a ? 1 : -1;
+      });
+    } else if (text === "popularity") {
+      return array.sort((a, b) => {
+        a = a.dataset.likes;
+        b = b.dataset.likes;
+        return b > a ? 1 : -1;
+      });
+    } else if (text === "date") {
+      return array.sort((a, b) => {
+        a = new Date(a.dataset.date);
+        b = new Date(b.dataset.date);
+        return a > b ? 1 : -1;
+      });
+    } else if (text === "title") {
+      return array.sort((a, b) => {
+        a = a.dataset.title;
+        b = b.dataset.title;
+        return a > b ? 1 : -1;
+      });
+    }
+  }
+
+  flipInit() {
+    (this.duration = 500), (this.positions = {});
+  }
+
+  flipRead(elements) {
+    elements.forEach((element) => {
+      const id = element.getAttribute("id");
+      this.positions[id] = element.getBoundingClientRect();
+    });
+  }
+
+  flipPlay(elements) {
+    elements.forEach((element) => {
+      const id = element.getAttribute("id");
+      const newPosition = element.getBoundingClientRect();
+      const oldPosition = this.positions[id];
+      const deltaX = oldPosition.x - newPosition.x;
+      const deltaY = oldPosition.y - newPosition.y;
+      element.animate(
+        [
+          {
+            transform: "translate(" + deltaX + "px, " + deltaY + "px)",
+          },
+          {
+            transform: "none",
+          },
+        ],
+        {
+          duration: this.duration,
+          easing: "ease-in-out",
+          fill: "both",
+        }
+      );
+      element.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
     });
   }
 }

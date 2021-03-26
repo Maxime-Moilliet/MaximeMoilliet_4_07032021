@@ -400,7 +400,7 @@ const bdd = {
       alt: "Photo d'un portrait (mercredi)",
       tags: ["portait"],
       likes: 34,
-      date: "2019-04-07",
+      date: "2019-04-08",
       price: 45,
     },
     {
@@ -451,7 +451,7 @@ const bdd = {
       id: 23523434,
       photographerId: 243,
       image: "Event_BenevidesWedding.jpg",
-      title: "Mariage",
+      title: "Mariage 2",
       alt: "Photo de mariage",
       tags: ["events"],
       likes: 77,
