@@ -25,6 +25,7 @@ class PhotographerAccueil {
 
   tagClicked(e) {
     e.preventDefault();
+    console.log('salut')
     const url = new URL(window.location.href).searchParams;
     let tagExist = url.getAll("tag");
     const addTag = e.currentTarget.dataset.name;
@@ -97,15 +98,19 @@ class PhotographerAccueil {
       const ul = card.querySelector(".cardPhotographer__tags");
       photographer.tags.forEach((tag) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="/MaximeMoilliet_4_07032021/"><span class="tag__item" id="js-tags" data-name="${tag}">#${tag}</sapn></a>`;
+        li.innerHTML = `<a href="#"><span class="tag__item" id="js-tagLi" data-name="${tag}">#${tag}</sapn></a>`;
         tagExist.forEach((tags) => {
           if (tag == tags) {
-            li.setAttribute("class", "tag__item active")
+            li.setAttribute("class", "tag__item active");
           }
         });
         ul.appendChild(li);
       });
       container.appendChild(card);
+    });
+    const tags = document.querySelectorAll("#js-tagLi");
+    tags.forEach((tag) => {
+      tag.addEventListener("click", this.tagClicked.bind(this));
     });
   }
 }
