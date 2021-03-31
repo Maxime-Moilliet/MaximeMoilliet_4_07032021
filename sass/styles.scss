@@ -1,20 +1,20 @@
-@import './utils/variables.scss';
-@import './utils/reset.scss';
-@import './utils/heritages.scss';
+@import "./utils/variables.scss";
+@import "./utils/reset.scss";
+@import "./utils/heritages.scss";
 
-@import './bases/header.scss';
+@import "./bases/header.scss";
 
-@import './components/button';
-@import './components/loader';
-@import './components/tag';
-@import './components/cardPhotographer';
-@import './components/filter';
-@import './components/cardGallery';
-@import './components/bannerPhotographer';
-@import './components/infoPhotographer';
-@import './components/lightbox';
-@import './components/modal';
+@import "./components/returnTop";
+@import "./components/button";
+@import "./components/loader";
+@import "./components/tag";
+@import "./components/cardPhotographer";
+@import "./components/filter";
+@import "./components/cardGallery";
+@import "./components/bannerPhotographer";
+@import "./components/infoPhotographer";
+@import "./components/lightbox";
+@import "./components/modal";
 
-@import './pages/accueil';
-@import './pages/profile';
-
+@import "./pages/accueil";
+@import "./pages/profile";

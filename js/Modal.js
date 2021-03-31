@@ -116,7 +116,7 @@ class Modal {
   validateArea(input) {
     this.inputValidate(
       input,
-      "^[a-zA-Z0-9*-_ éèâàç&.'=+:()[]|/]{10,1000}$",
+      "",
       "Veuillez remplir le champs de text",
       "Le champs doit contenir au moins 10 caractères"
     );

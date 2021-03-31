@@ -4,6 +4,7 @@ import { Lightbox } from "./Lightbox.js";
 import { Modal } from "./Modal.js";
 import { Likes } from "./Likes.js";
 import { PhotographerAccueil } from "./PhotographerAccueil.js";
+import { ReturnTop } from "./ReturnTop.js";
 
 class Factory {
   constructor() {
@@ -19,6 +20,8 @@ class Factory {
         classType = new Likes(bdd, id);
       } else if (type === "PhotographerAccueil") {
         classType = new PhotographerAccueil(bdd);
+      } else if (type === "ReturnTop") {
+        classType = new ReturnTop();
       }
       return classType;
     };
@@ -65,8 +68,9 @@ if (
   url.pathname === "/" ||
   url.pathname === "/index.html" ||
   url.pathname === "/MaximeMoilliet_4_07032021/"
-) {
-  window.onload = () => {
-    factory.create("PhotographerAccueil");
-  }
+  ) {
+    window.onload = () => {
+      factory.create("PhotographerAccueil");
+      factory.create("ReturnTop");
+  };
 }
