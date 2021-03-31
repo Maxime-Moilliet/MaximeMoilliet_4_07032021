@@ -25,7 +25,6 @@ class PhotographerAccueil {
 
   tagClicked(e) {
     e.preventDefault();
-    console.log('salut')
     const url = new URL(window.location.href).searchParams;
     let tagExist = url.getAll("tag");
     const addTag = e.currentTarget.dataset.name;
@@ -74,6 +73,14 @@ class PhotographerAccueil {
         container.removeChild(card);
       });
     }
+    const noFound = document.querySelector(".noFound")
+    if(photographersExist.length === 0) {
+      noFound.style.display = "flex"
+      noFound.setAttribute("aria-hidden", "false")
+    } else {
+      noFound.style.display = "none"
+      noFound.setAttribute("aria-hidden", "true")
+    }
     this.buildCard(photographersExist, tagExist);
   }
 
@@ -85,7 +92,7 @@ class PhotographerAccueil {
       const card = document.createElement("article");
       card.setAttribute("class", "cardPhotographer");
       card.setAttribute("id", "js-card");
-      card.innerHTML = `<a href="./photographer-profile?id=${photographer.id}">
+      card.innerHTML = `<a href="/MaximeMoilliet_4_07032021/?id=${photographer.id}">
           <img class="cardPhotographer__img" src="./photos/PhotographersIDPhotos/${photographer.portrait}"
               alt="${photographer.alt}">
           <h2 class="cardPhotographer__name">${photographer.name}</h2>
