@@ -7,9 +7,9 @@ class ReturnTop {
     const returnTop = document.getElementById("js-returnTop");
     const header = document.querySelector(".header");
     if (window.scrollY >= header.offsetHeight - 30) {
-      returnTop.style.top = "10px";
+      returnTop.style.display = "block";
     } else if (window.scrollY < header.offsetHeight - 30) {
-      returnTop.style.top = "-100px";
+      returnTop.style.display = "none"
     }
   }
 
