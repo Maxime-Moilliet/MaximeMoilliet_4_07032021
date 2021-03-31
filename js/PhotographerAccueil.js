@@ -35,7 +35,7 @@ class PhotographerAccueil {
       tagExist.push(addTag);
     }
 
-    let newUrl = "/MaximeMoilliet_4_07032021/index.html";
+    let newUrl = "/MaximeMoilliet_4_07032021/";
     tagExist.forEach((tag, i) => {
       if (i === 0) {
         newUrl += `?tag=${tag}`;
@@ -84,7 +84,7 @@ class PhotographerAccueil {
       const card = document.createElement("article");
       card.setAttribute("class", "cardPhotographer");
       card.setAttribute("id", "js-card");
-      card.innerHTML = `<a href="./photographer-profile.html?id=${photographer.id}">
+      card.innerHTML = `<a href="./photographer-profile?id=${photographer.id}">
           <img class="cardPhotographer__img" src="./photos/PhotographersIDPhotos/${photographer.portrait}"
               alt="${photographer.alt}">
           <h2 class="cardPhotographer__name">${photographer.name}</h2>
@@ -97,7 +97,7 @@ class PhotographerAccueil {
       const ul = card.querySelector(".cardPhotographer__tags");
       photographer.tags.forEach((tag) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="/"><span class="tag__item" id="js-tags" data-name="${tag}">#${tag}</sapn></a>`;
+        li.innerHTML = `<a href="/MaximeMoilliet_4_07032021/"><span class="tag__item" id="js-tags" data-name="${tag}">#${tag}</sapn></a>`;
         tagExist.forEach((tags) => {
           if (tag == tags) {
             li.setAttribute("class", "tag__item active")
