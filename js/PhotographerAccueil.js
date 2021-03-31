@@ -35,7 +35,7 @@ class PhotographerAccueil {
       tagExist.push(addTag);
     }
 
-    let newUrl = "index.html";
+    let newUrl = "/MaximeMoilliet_4_07032021/index.html";
     tagExist.forEach((tag, i) => {
       if (i === 0) {
         newUrl += `?tag=${tag}`;
@@ -49,7 +49,6 @@ class PhotographerAccueil {
 
   toggleClass(tagExist) {
     const tags = Array.from(document.querySelectorAll("#js-tags"));
-    console.log(tags.filter((tag) => tag.dataset.name == "portrait"));
     tags.forEach((tag) => {
       if (tagExist.includes(tag.dataset.name)) {
         tag.classList.add("active");
@@ -100,7 +99,6 @@ class PhotographerAccueil {
         const li = document.createElement("li");
         li.innerHTML = `<a href=""><span class="tag__item" id="js-tags" data-name="${tag}">#${tag}</sapn></a>`;
         tagExist.forEach((tags) => {
-          console.log(tags, tag);
           if (tag == tags) {
             li.setAttribute("class", "tag__item active")
           }
