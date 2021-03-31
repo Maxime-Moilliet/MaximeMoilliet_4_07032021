@@ -92,7 +92,7 @@ class PhotographerAccueil {
       const card = document.createElement("article");
       card.setAttribute("class", "cardPhotographer");
       card.setAttribute("id", "js-card");
-      card.innerHTML = `<a href="/MaximeMoilliet_4_07032021/?id=${photographer.id}">
+      card.innerHTML = `<a href="/MaximeMoilliet_4_07032021/photographer-profile?id=${photographer.id}">
           <img class="cardPhotographer__img" src="./photos/PhotographersIDPhotos/${photographer.portrait}"
               alt="${photographer.alt}">
           <h2 class="cardPhotographer__name">${photographer.name}</h2>
