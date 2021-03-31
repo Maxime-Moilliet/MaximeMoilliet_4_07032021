@@ -66,5 +66,7 @@ if (
   url.pathname === "/index.html" ||
   url.pathname === "/MaximeMoilliet_4_07032021/"
 ) {
-  factory.create("PhotographerAccueil");
+  window.onload = () => {
+    factory.create("PhotographerAccueil");
+  }
 }

@@ -1,5 +1,7 @@
 .main {
   margin-bottom: 60px;
+  margin-right: 20px;
+  margin-left: 20px;
 
   &__title {
     font-size: 1.4rem;
@@ -35,7 +37,7 @@
   }
   @media only screen and (min-width: 1400px) {
     .main__container {
-      gap: 40px 250px;
+      gap: 40px 260px;
     }
   }
   @media only screen and (min-width: 1500px) {

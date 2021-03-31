@@ -30,7 +30,7 @@ function crear_select() {
     let select_optiones = select_.options;
     document
       .querySelectorAll(
-        "[data-indx-select='" + e + "']  > .selecionado_opcion "
+        "[data-indx-select='" + e + "']  > .select__option "
       )[0]
       .setAttribute("data-n-select", e);
     document
@@ -46,7 +46,7 @@ function crear_select() {
       ) {
         li[i].className = "active";
         document.querySelector(
-          "[data-indx-select='" + e + "']  > .selecionado_opcion "
+          "[data-indx-select='" + e + "']  > .select__option "
         ).innerHTML = select_optiones[i].innerHTML;
       }
       li[i].setAttribute("data-index", i);
@@ -162,7 +162,7 @@ function _select_option(indx, selc) {
     "[data-indx-select='" + selc + "'] .cont_select_int > li"
   );
   let p_act = (document.querySelectorAll(
-    "[data-indx-select='" + selc + "'] > .selecionado_opcion"
+    "[data-indx-select='" + selc + "'] > .select__option"
   )[0].innerHTML = li_s[indx].innerHTML);
   let select_optiones = document.querySelectorAll(
     "[data-indx-select='" + selc + "'] > select > option"

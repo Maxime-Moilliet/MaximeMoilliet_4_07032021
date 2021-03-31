@@ -5,7 +5,6 @@ class PhotographerProfile {
     select.forEach((option) => {
       addEventListener("click", () => {
         this.filterOption(option.value);
-        console.log(option.value)
       });
     });
     this.filterBdd(id);
@@ -25,13 +24,19 @@ class PhotographerProfile {
     this.flipRead(cards);
     if (value === "0") {
       this.sortMedias(this.cards, "popularity");
+      this.sortMedias(this.images, "popularity")
       this.ChangeGallery(this.cards);
+      this.ChangeGallery(this.images);
     } else if (value === "1") {
       this.sortMedias(this.cards, "date");
+      this.sortMedias(this.images, "date");
       this.ChangeGallery(this.cards);
+      this.ChangeGallery(this.images);
     } else if (value === "2") {
       this.sortMedias(this.cards, "title");
+      this.sortMedias(this.images, "title");
       this.ChangeGallery(this.cards);
+      this.ChangeGallery(this.images);
     }
     this.flipPlay(this.cards);
   }
@@ -54,7 +59,7 @@ class PhotographerProfile {
     photographer[0].tags.forEach((el) => {
       let li = document.createElement("li");
       let link = document.createElement("a");
-      link.setAttribute("href", "/?tag=" + el);
+      link.setAttribute("href", "/MaximeMoilliet_4_07032021/?tag=" + el);
       let tag = document.createElement("span");
       tag.setAttribute("class", "tag__item");
       tag.setAttribute("id", "js-tag");
@@ -66,7 +71,7 @@ class PhotographerProfile {
     });
   }
 
-  LoadImage(element, urlImage, media) {
+  LoadImage(element, urlImage, media, idx) {
     const link = document.createElement("a");
     const image = new Image();
     const loader = document.createElement("div");
@@ -77,19 +82,25 @@ class PhotographerProfile {
     image.setAttribute("id", "js-galleryImg");
     image.setAttribute("class", "cardGallery__img");
     image.setAttribute("alt", media.alt);
+    image.setAttribute("data-order", idx)
+    image.setAttribute("data-likes", media.likes)
+    image.setAttribute("data-date", media.date)
+    image.setAttribute("data-title", media.title)
     link.prepend(loader);
     image.onload = () => {
       link.prepend(image);
       link.removeChild(loader);
+      this.images.push(image)
     };
   }
 
   buildGallery(medias) {
     this.cards = [];
-    medias.forEach((media, i) => {
+    this.images = [];
+    medias.forEach((media, idx) => {
       const card = document.createElement("article");
       card.setAttribute("id", media.id);
-      card.setAttribute("data-order", i);
+      card.setAttribute("data-order", idx);
       card.setAttribute("data-title", media.title);
       card.setAttribute("data-likes", media.likes);
       card.setAttribute("data-date", media.date);
@@ -121,7 +132,7 @@ class PhotographerProfile {
         media.id +
         '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
 
-      this.LoadImage(card, galleryUrl, media);
+      this.LoadImage(card, galleryUrl, media, idx);
       this.cards.push(card);
     });
     const gallery = document.querySelector("#js-container");
@@ -133,6 +144,7 @@ class PhotographerProfile {
   ChangeGallery(gallery) {
     gallery.forEach((media, i) => {
       this.cards[i].dataset.order = i;
+      this.images[i].dataset.order = i;
     });
   }
 

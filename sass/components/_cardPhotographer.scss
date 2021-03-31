@@ -1,6 +1,7 @@
 .cardPhotographer {
-  max-width: 300px;
+  max-width: 310px;
   text-align: center;
+  display: block;
 
   &__img {
     width: 270px;
@@ -9,7 +10,7 @@
     object-fit: cover;
   }
   &__name {
-    font-size: 3.6rem;
+    font-size: 3.5rem;
     line-height: 4.7rem;
     margin-top: 20px;
     color: $color-secondary;
@@ -30,16 +31,25 @@
     font-size: 0.9rem;
     line-height: 1.2rem;
     margin-bottom: 6px;
-  } 
+  }
   &__tags {
     @extend %center;
     flex-wrap: wrap;
     margin-top: -12px;
   }
   &__tags > * + * {
-      margin-left: 5px;
-  } 
-  &__tags li {
-      margin-top: 8px;
+    margin-left: 5px;
   }
+  &__tags li {
+    margin-top: 8px;
+  }
+}
+.cardPhotographer ul li.active {
+  margin-top: 14px;
+}
+.cardPhotographer ul li.active .tag__item {
+  margin-top: 0px;
+  color: #ffffff;
+  background-color: $color-primary;
+  border-color: $color-primary;
 }

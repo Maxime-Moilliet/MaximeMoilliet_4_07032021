@@ -7,12 +7,18 @@ class Lightbox {
   constructor(bdd) {
     this.bdd = bdd;
     const images = Array.from(document.querySelectorAll("#js-galleryImg"));
-    const galleryImages = images.map((image) => image.getAttribute("src"));
-    const galleryAlts = images.map((image) => image.getAttribute("alt"));
-    const title = Array.from(document.querySelectorAll("#js-title"));
-    const galleryTitles = title.map((alt) => alt.innerHTML);
     images.forEach((image) => {
       image.addEventListener("click", (e) => {
+        const images2 = Array.from(document.querySelectorAll("#js-galleryImg"));
+        images2.sort((a, b) => {
+          a = a.dataset.order
+          b = b.dataset.order
+          return a > b ? 1 : -1
+        })
+        const title = Array.from(document.querySelectorAll("#js-title"));
+        const galleryAlts = images2.map((image) => image.getAttribute("alt"));
+        const galleryImages = images2.map((image) => image.getAttribute("src"));
+        const galleryTitles = title.map((alt) => alt.innerHTML);
         this.InitLightbox(
           e.currentTarget.getAttribute("src"),
           e.currentTarget.getAttribute("alt"),
