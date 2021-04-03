@@ -11,14 +11,13 @@ class Lightbox {
       image.addEventListener("click", (e) => {
         const images2 = Array.from(document.querySelectorAll("#js-galleryImg"));
         images2.sort((a, b) => {
-          a = a.dataset.order
-          b = b.dataset.order
-          return a > b ? 1 : -1
-        })
-        const title = Array.from(document.querySelectorAll("#js-title"));
-        const galleryAlts = images2.map((image) => image.getAttribute("alt"));
+          a = a.dataset.order;
+          b = b.dataset.order;
+          return a > b ? 1 : -1;
+        });
+        const galleryAlts = images2.map((image) => image.dataset.alt);
         const galleryImages = images2.map((image) => image.getAttribute("src"));
-        const galleryTitles = title.map((alt) => alt.innerHTML);
+        const galleryTitles = images2.map((image) => image.dataset.title);
         this.InitLightbox(
           e.currentTarget.getAttribute("src"),
           e.currentTarget.getAttribute("alt"),
@@ -36,6 +35,25 @@ class Lightbox {
     this.alts = alts;
     this.element = this.buildLightbox();
     const titleValue = this.bdd.media.filter((el) => el.alt == alt)[0].title;
+    const photographerId = this.bdd.media.filter((el) => el.alt == alt)[0]
+      .photographerId;
+    this.videoPath = null;
+    const video = this.bdd.media.filter(
+      (el) => el.photographerId == photographerId && el.image == undefined
+    )[0].video;
+    if (photographerId === 82) {
+      this.videoPath = "/photos/Tracy/" + video;
+    } else if (photographerId === 243) {
+      this.videoPath = "./photos/Mimi/" + video;
+    } else if (photographerId === 925) {
+      this.videoPath = "./photos/Rhode/" + video;
+    } else if (photographerId === 527) {
+      this.videoPath = "./photos/Nabeel/" + video;
+    } else if (photographerId === 195) {
+      this.videoPath = "./photos/Marcel/" + video;
+    } else if (photographerId === 930) {
+      this.videoPath = "./photos/Ellie-Rose/" + video;
+    }
     this.loadImage(url, titleValue, alt);
     document.body.appendChild(this.element);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -47,26 +65,41 @@ class Lightbox {
     this.url = null;
     this.title = null;
     this.alt = null;
-    const image = new Image();
     const container = this.element.querySelector(".lightbox__container");
-    const loader = document.createElement("div");
     const title = document.createElement("h2");
     title.classList.add("lightbox__title");
     title.innerHTML = titleValue;
+    const image = new Image();
     image.classList.add("lightbox__img");
     image.src = url;
     image.alt = alt;
-    loader.classList.add("loader");
     container.innerHTML = "";
-    container.prepend(loader);
     image.onload = () => {
-      container.removeChild(loader);
       container.prepend(image);
       container.appendChild(title);
       this.url = url;
       this.title = titleValue;
       this.alt = alt;
     };
+    if (url === "./photos/miniature/video.jpg") {
+      container.innerHTML = "";
+      image.style.display = "none";
+      const videoPlayer = document.createElement("video");
+      videoPlayer.setAttribute("controls", "");
+      videoPlayer.setAttribute("autoplay", "");
+      videoPlayer.setAttribute("loop", "");
+      videoPlayer.style.maxWidth = "100%";
+      videoPlayer.style.maxHeight = "calc(100vh - 150px)";
+      const source = document.createElement("source");
+      source.setAttribute("src", this.videoPath);
+      source.setAttribute("type", "video/mp4");
+      container.appendChild(videoPlayer);
+      videoPlayer.appendChild(source);
+      container.appendChild(title);
+      this.url = url;
+      this.title = titleValue;
+      this.alt = alt;
+    }
   }
 
   buildLightbox() {

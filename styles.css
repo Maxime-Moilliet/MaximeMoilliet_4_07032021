@@ -508,6 +508,9 @@ a {
   border-radius: 5px;
   cursor: pointer;
 }
+.cardGallery__img[src="./photos/miniature/video.jpg"] {
+  object-position: 55% 80%;
+}
 .cardGallery__content {
   display: flex;
   justify-content: space-between;

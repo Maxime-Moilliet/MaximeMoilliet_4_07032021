@@ -24,7 +24,7 @@ class PhotographerProfile {
     this.flipRead(cards);
     if (value === "0") {
       this.sortMedias(this.cards, "popularity");
-      this.sortMedias(this.images, "popularity")
+      this.sortMedias(this.images, "popularity");
       this.ChangeGallery(this.cards);
       this.ChangeGallery(this.images);
     } else if (value === "1") {
@@ -82,15 +82,19 @@ class PhotographerProfile {
     image.setAttribute("id", "js-galleryImg");
     image.setAttribute("class", "cardGallery__img");
     image.setAttribute("alt", media.alt);
-    image.setAttribute("data-order", idx)
-    image.setAttribute("data-likes", media.likes)
-    image.setAttribute("data-date", media.date)
-    image.setAttribute("data-title", media.title)
+    image.setAttribute("data-order", idx);
+    image.setAttribute("data-likes", media.likes);
+    image.setAttribute("data-date", media.date);
+    image.setAttribute("data-title", media.title);
+    image.setAttribute("data-alt", media.alt);
+    if(urlImage === "./photos/miniature/video.jpg") {
+      image.setAttribute("data-url", media.id)
+    }
     link.prepend(loader);
     image.onload = () => {
       link.prepend(image);
       link.removeChild(loader);
-      this.images.push(image)
+      this.images.push(image);
     };
   }
 
@@ -105,18 +109,22 @@ class PhotographerProfile {
       card.setAttribute("data-likes", media.likes);
       card.setAttribute("data-date", media.date);
       let galleryUrl = null;
-      if (media.photographerId === 243) {
-        galleryUrl = "./photos/Mimi/" + media.image;
-      } else if (media.photographerId === 930) {
-        galleryUrl = "./photos/Ellie-Rose/" + media.image;
-      } else if (media.photographerId === 82) {
-        galleryUrl = "./photos/Tracy/" + media.image;
-      } else if (media.photographerId === 527) {
-        galleryUrl = "./photos/Nabeel/" + media.image;
-      } else if (media.photographerId === 925) {
-        galleryUrl = "./photos/Rhode/" + media.image;
-      } else if (media.photographerId === 195) {
-        galleryUrl = "./photos/Marcel/" + media.image;
+      if (media.video === undefined) {
+        if (media.photographerId === 243) {
+          galleryUrl = "./photos/Mimi/" + media.image;
+        } else if (media.photographerId === 930) {
+          galleryUrl = "./photos/Ellie-Rose/" + media.image;
+        } else if (media.photographerId === 82) {
+          galleryUrl = "./photos/Tracy/" + media.image;
+        } else if (media.photographerId === 527) {
+          galleryUrl = "./photos/Nabeel/" + media.image;
+        } else if (media.photographerId === 925) {
+          galleryUrl = "./photos/Rhode/" + media.image;
+        } else if (media.photographerId === 195) {
+          galleryUrl = "./photos/Marcel/" + media.image;
+        }
+      } else {
+        galleryUrl = "./photos/miniature/video.jpg";
       }
       card.setAttribute("class", "cardGallery");
       card.innerHTML =
@@ -131,7 +139,6 @@ class PhotographerProfile {
         '</p><a href="#' +
         media.id +
         '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
-
       this.LoadImage(card, galleryUrl, media, idx);
       this.cards.push(card);
     });
