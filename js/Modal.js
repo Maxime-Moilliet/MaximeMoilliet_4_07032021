@@ -1,169 +1,231 @@
 import {
   enableBodyScroll,
   disableBodyScroll,
-} from "./libs/body-scroll-lock.js";
+} from './libs/body-scroll-lock.js';
 
 class Modal {
+  /**
+   * Initialization Modal
+   * @param {array} bdd
+   * @param {string} id
+   */
   constructor(bdd, id) {
     this.bdd = bdd;
     this.initModal(id);
   }
 
+  /**
+   * Initialization Modal on click open Modal
+   * @param {string} id
+   */
   initModal(id) {
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
-    const name = document.querySelector(".modal__title");
-    name.innerHTML = "Contactez-moi <br/>" + photographer[0].name;
-    const btns = document.querySelectorAll("#js-modal");
-    const modal = document.querySelector(".modal");
-
+    const name = document.querySelector('.modal__title');
+    name.innerHTML = `Contactez-moi <br/>${photographer[0].name}`;
+    const btns = document.querySelectorAll('#js-modal');
+    const modal = document.querySelector('.modal');
     btns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
+      btn.addEventListener('click', (e) => {
         this.openModal(e, modal);
-        window.addEventListener("keyup", (e) => {
-          if (e.key === "Esc" || e.key === "Escape") {
-            if (this.element.getAttribute("aria-hidden") == "false") {
+        window.addEventListener('keyup', (e) => {
+          if (e.key === 'Esc' || e.key === 'Escape') {
+            if (this.element.getAttribute('aria-hidden') === 'false') {
               this.closeModal(e);
             }
           }
         });
       });
     });
-    document.getElementById("js-submit").setAttribute("disabled", "true");
-    const form = document.getElementById("js-form");
+    document.getElementById('js-submit').setAttribute('disabled', 'true');
+    const form = document.getElementById('js-form');
     const inputs = [
-      document.getElementById("first"),
-      document.getElementById("last"),
-      document.getElementById("mail"),
-      document.getElementById("area"),
+      document.getElementById('first'),
+      document.getElementById('last'),
+      document.getElementById('mail'),
+      document.getElementById('area'),
     ];
-    form.addEventListener("change", (e) => {
+    form.addEventListener('change', (e) => {
       e.preventDefault();
-      this.validateText(inputs[0], "prénom");
-      this.validateText(inputs[1], "nom");
+      this.validateText(inputs[0], 'prénom');
+      this.validateText(inputs[1], 'nom');
       this.validateMail(inputs[2]);
       this.validateArea(inputs[3]);
       this.validate(inputs);
     });
-    form.addEventListener("submit", (e) => {
-      e.preventDefault()
-      document.getElementById("js-form").style.display = "none";
-      document.getElementById("modalTitle").style.display = "none";
-      document.querySelector(".modal__formValid").style.display = "block";
-      console.log("Nom du photographe : " + photographer[0].name)
-      console.log("input prénom : " + inputs[0].value)
-      console.log("input nom : " + inputs[1].value)
-      console.log("input mail : " + inputs[2].value)
-      console.log("input textarea : " + inputs[3].value)
-    })
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('js-form').style.display = 'none';
+      document.getElementById('modalTitle').style.display = 'none';
+      document.querySelector('.modal__formValid').style.display = 'block';
+      console.log(`Nom du photographe : ${photographer[0].name}`);
+      console.log(`input prénom : ${inputs[0].value}`);
+      console.log(`input nom : ${inputs[1].value}`);
+      console.log(`input mail : ${inputs[2].value}`);
+      console.log(`input textarea : ${inputs[3].value}`);
+    });
   }
 
+  /**
+   * Open Modal
+   * @param {event} e
+   * @param {HTMLElement} element
+   */
   openModal(e, element) {
     e.preventDefault();
     this.element = element;
     this.changeDisplay();
     this.changeArias();
     disableBodyScroll(this.element);
-    this.close = document.querySelector("#js-modalClose");
+    this.close = document.querySelector('#js-modalClose');
     this.closeModal = this.closeModal.bind(this);
-    this.close.addEventListener("click", this.closeModal);
+    this.close.addEventListener('click', this.closeModal);
   }
 
+  /**
+   * Change Aria Modal
+   */
   changeArias() {
-    if (this.element.getAttribute("aria-hidden") === "true") {
-      this.element.setAttribute("aria-hidden", "false");
-      this.element.setAttribute("aria-modal", "true");
+    if (this.element.getAttribute('aria-hidden') === 'true') {
+      this.element.setAttribute('aria-hidden', 'false');
+      this.element.setAttribute('aria-modal', 'true');
     } else {
-      this.element.setAttribute("aria-hidden", "true");
-      this.element.setAttribute("aria-modal", "false");
+      this.element.setAttribute('aria-hidden', 'true');
+      this.element.setAttribute('aria-modal', 'false');
     }
   }
 
+  /**
+   * Change display Modal
+   */
   changeDisplay() {
-    if (this.element.style.display === "none") {
-      this.element.style.display = "flex";
+    if (this.element.style.display === 'none') {
+      this.element.style.display = 'flex';
     } else {
-      this.element.style.display = "none";
+      this.element.style.display = 'none';
     }
   }
 
+  /**
+   * Close Modal
+   */
   closeModal() {
     this.changeArias();
     enableBodyScroll(this.element);
     window.setTimeout(() => {
       this.changeDisplay();
     }, 500);
-    this.close.removeEventListener("click", this.closeModal);
+    this.close.removeEventListener('click', this.closeModal);
   }
 
+  /**
+   * Validate input type string (firstname...)
+   * @param {HTMLElement} input
+   * @param {string} name
+   */
   validateText(input, name) {
     this.inputValidate(
       input,
-      "^[a-zA-Z- ]{3,20}$",
-      "Veuillez remplir le champs " + name,
-      "Le champs doit contenir que des lettres et avoir au moins 3 caractères"
+      '^[a-zA-Z- ]{3,20}$',
+      `Veuillez remplir le champs ${name}`,
+      'Le champs doit contenir que des lettres et avoir au moins 3 caractères',
     );
   }
 
+  /**
+   * Validate input mail
+   * @param {HTMLElement} input
+   */
   validateMail(input) {
     this.inputValidate(
       input,
-      "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
-      "Veuillez remplir le champs mail",
-      "Veuillez entrer une adresse mail valide"
+      '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$',
+      'Veuillez remplir le champs mail',
+      'Veuillez entrer une adresse mail valide',
     );
   }
 
+  /**
+   * Validate input area
+   * @param {HTMLElement} input
+   */
   validateArea(input) {
     this.inputValidate(
       input,
-      "",
-      "Veuillez remplir le champs de text",
-      "Le champs doit contenir au moins 10 caractères"
+      '',
+      'Veuillez remplir le champs de text',
+      'Le champs doit contenir au moins 10 caractères',
     );
   }
 
+  /**
+   * Validate is empty ?
+   * @param {HTMLElement} input
+   * @param {string} regexp
+   * @param {string} textEmpty
+   * @param {string} textNoValid
+   * @returns inputError or continue script
+   */
   inputValidate(input, regexp, textEmpty, textNoValid) {
-    if (input.value.trim() === "") {
+    if (input.value.trim() === '') {
       return this.inputError(input, textEmpty);
-    } else {
-      return this.inputRegExp(input, regexp, textNoValid);
     }
+    return this.inputRegExp(input, regexp, textNoValid);
   }
 
+  /**
+   * Validate pattern input value
+   * @param {HTMLElement} input
+   * @param {string} regexp
+   * @param {string} text
+   * @returns
+   */
   inputRegExp(input, regexp, text) {
-    let reg = new RegExp(regexp, "g");
+    const reg = new RegExp(regexp, 'g');
 
     if (reg.test(input.value)) {
       return this.inputValid(input);
-    } else {
-      return this.inputError(input, text);
     }
+    return this.inputError(input, text);
   }
 
+  /**
+   * Show Error
+   * @param {HTMLElement} input
+   * @param {string} text
+   * @returns error
+   */
   inputError(input, text) {
     return (
       (input.parentNode.dataset.error = text),
-      (input.parentNode.dataset.errorVisible = "true")
+      (input.parentNode.dataset.errorVisible = 'true')
     );
   }
 
+  /**
+   * Remove all text error
+   * @param {HTMLElemnt} input
+   * @returns
+   */
   inputValid(input) {
     return (
-      (input.parentNode.dataset.error = ""),
-      (input.parentNode.dataset.errorVisible = "false")
+      (input.parentNode.dataset.error = ''),
+      (input.parentNode.dataset.errorVisible = 'false')
     );
   }
 
+  /**
+   * checks if all the inputs is valid and start animation
+   * @param {HTMLElements} inputs
+   */
   validate(inputs) {
     let validateInputs = 0;
-
     inputs.forEach((input) => {
-      if (input.parentNode.dataset.error == "") {
-        validateInputs++;
+      if (input.parentNode.dataset.error === '') {
+        validateInputs += 1;
       }
     });
     if (inputs.length === validateInputs) {
-      document.getElementById("js-submit").removeAttribute("disabled");
+      document.getElementById('js-submit').removeAttribute('disabled');
     }
   }
 }

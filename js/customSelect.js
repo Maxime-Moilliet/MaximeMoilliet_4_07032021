@@ -81,7 +81,6 @@ function open_select(idx) {
   )[0];
   if (isMobileDevice()) {
     if (window.document.createEvent) {
-      // All
       let evt = window.document.createEvent("MouseEvents");
       evt.initMouseEvent(
         "mousedown",
@@ -102,7 +101,6 @@ function open_select(idx) {
       );
       slect_element_open.dispatchEvent(evt);
     } else if (slect_element_open.fireEvent) {
-      // IE
       slect_element_open.fireEvent("onmousedown");
     } else {
       slect_element_open.click();

@@ -1,69 +1,86 @@
 class PhotographerProfile {
+  /**
+   * on click Initialize filterOption
+   * @param {array} bdd
+   * @param {string} id
+   */
   constructor(bdd, id) {
     this.bdd = bdd;
-    const select = document.querySelectorAll("#js-filter");
+    const select = document.querySelectorAll('#js-filter');
     select.forEach((option) => {
-      addEventListener("click", () => {
+      addEventListener('click', () => {
         this.filterOption(option.value);
       });
     });
     this.filterBdd(id);
   }
 
+  /**
+   * Filter elements bdd
+   * @param {integer} id
+   */
   filterBdd(id) {
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
     const medias = this.bdd.media.filter((el) => el.photographerId == id);
-    this.sortMedias(medias, "init");
+    this.sortMedias(medias, 'init');
     this.buildBanner(photographer);
     this.buildGallery(medias);
   }
 
+  /**
+   * Change the order of the elements
+   * @param {HTMLElement.value} value
+   */
   filterOption(value) {
-    const cards = document.querySelectorAll(".cardGallery");
+    const cards = document.querySelectorAll('.cardGallery');
     this.flipInit();
     this.flipRead(cards);
-    if (value === "0") {
-      this.sortMedias(this.cards, "popularity");
-      this.sortMedias(this.images, "popularity");
+    if (value === '0') {
+      this.sortMedias(this.cards, 'popularity');
+      this.sortMedias(this.images, 'popularity');
       this.ChangeGallery(this.cards);
       this.ChangeGallery(this.images);
-    } else if (value === "1") {
-      this.sortMedias(this.cards, "date");
-      this.sortMedias(this.images, "date");
+    } else if (value === '1') {
+      this.sortMedias(this.cards, 'date');
+      this.sortMedias(this.images, 'date');
       this.ChangeGallery(this.cards);
       this.ChangeGallery(this.images);
-    } else if (value === "2") {
-      this.sortMedias(this.cards, "title");
-      this.sortMedias(this.images, "title");
+    } else if (value === '2') {
+      this.sortMedias(this.cards, 'title');
+      this.sortMedias(this.images, 'title');
       this.ChangeGallery(this.cards);
       this.ChangeGallery(this.images);
     }
     this.flipPlay(this.cards);
   }
 
+  /**
+   * Buil banner photographer in DOM
+   * @param {arrayElement} photographer
+   */
   buildBanner(photographer) {
-    const name = document.querySelector(".banner__title");
-    const location = document.querySelector(".banner__location");
-    const description = document.querySelector(".banner__description");
-    const tagContainer = document.querySelector(".banner__tags");
-    const image = document.querySelector(".banner__img");
+    const name = document.querySelector('.banner__title');
+    const location = document.querySelector('.banner__location');
+    const description = document.querySelector('.banner__description');
+    const tagContainer = document.querySelector('.banner__tags');
+    const image = document.querySelector('.banner__img');
 
     name.innerHTML = photographer[0].name;
-    location.innerHTML = photographer[0].city + ", " + photographer[0].country;
+    location.innerHTML = `${photographer[0].city}, ${photographer[0].country}`;
     description.innerHTML = photographer[0].tagline;
     image.setAttribute(
-      "src",
-      "./photos/PhotographersIDPhotos/" + photographer[0].portrait
+      'src',
+      `./photos/PhotographersIDPhotos/${photographer[0].portrait}`,
     );
 
     photographer[0].tags.forEach((el) => {
-      let li = document.createElement("li");
-      let link = document.createElement("a");
-      link.setAttribute("href", "/MaximeMoilliet_4_07032021/?tag=" + el);
-      let tag = document.createElement("span");
-      tag.setAttribute("class", "tag__item");
-      tag.setAttribute("id", "js-tag");
-      tag.innerHTML = "#" + el;
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.setAttribute('href', `/MaximeMoilliet_4_07032021/?tag=${el}`);
+      const tag = document.createElement('span');
+      tag.setAttribute('class', 'tag__item');
+      tag.setAttribute('id', 'js-tag');
+      tag.innerHTML = `#${el}`;
 
       tagContainer.appendChild(li);
       li.appendChild(link);
@@ -71,24 +88,31 @@ class PhotographerProfile {
     });
   }
 
+  /**
+   * Load image and build image in DOM
+   * @param {HTMLElement} element
+   * @param {string} urlImage
+   * @param {Object} media
+   * @param {integer} idx
+   */
   LoadImage(element, urlImage, media, idx) {
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     const image = new Image();
-    const loader = document.createElement("div");
-    link.setAttribute("href", "#");
+    const loader = document.createElement('div');
+    link.setAttribute('href', '#');
     element.prepend(link);
-    loader.classList.add("loader");
+    loader.classList.add('loader');
     image.src = urlImage;
-    image.setAttribute("id", "js-galleryImg");
-    image.setAttribute("class", "cardGallery__img");
-    image.setAttribute("alt", media.alt);
-    image.setAttribute("data-order", idx);
-    image.setAttribute("data-likes", media.likes);
-    image.setAttribute("data-date", media.date);
-    image.setAttribute("data-title", media.title);
-    image.setAttribute("data-alt", media.alt);
-    if(urlImage === "./photos/miniature/video.jpg") {
-      image.setAttribute("data-url", media.id)
+    image.setAttribute('id', 'js-galleryImg');
+    image.setAttribute('class', 'cardGallery__img');
+    image.setAttribute('alt', media.alt);
+    image.setAttribute('data-order', idx);
+    image.setAttribute('data-likes', media.likes);
+    image.setAttribute('data-date', media.date);
+    image.setAttribute('data-title', media.title);
+    image.setAttribute('data-alt', media.alt);
+    if (urlImage === './photos/miniature/video.jpg') {
+      image.setAttribute('data-url', media.id);
     }
     link.prepend(loader);
     image.onload = () => {
@@ -98,56 +122,63 @@ class PhotographerProfile {
     };
   }
 
+  /**
+   * Build cards in DOM
+   * @param {array} medias
+   */
   buildGallery(medias) {
     this.cards = [];
     this.images = [];
     medias.forEach((media, idx) => {
-      const card = document.createElement("article");
-      card.setAttribute("id", media.id);
-      card.setAttribute("data-order", idx);
-      card.setAttribute("data-title", media.title);
-      card.setAttribute("data-likes", media.likes);
-      card.setAttribute("data-date", media.date);
+      const card = document.createElement('article');
+      card.setAttribute('id', media.id);
+      card.setAttribute('data-order', idx);
+      card.setAttribute('data-title', media.title);
+      card.setAttribute('data-likes', media.likes);
+      card.setAttribute('data-date', media.date);
       let galleryUrl = null;
       if (media.video === undefined) {
         if (media.photographerId === 243) {
-          galleryUrl = "./photos/Mimi/" + media.image;
+          galleryUrl = `./photos/Mimi/${media.image}`;
         } else if (media.photographerId === 930) {
-          galleryUrl = "./photos/Ellie-Rose/" + media.image;
+          galleryUrl = `./photos/Ellie-Rose/${media.image}`;
         } else if (media.photographerId === 82) {
-          galleryUrl = "./photos/Tracy/" + media.image;
+          galleryUrl = `./photos/Tracy/${media.image}`;
         } else if (media.photographerId === 527) {
-          galleryUrl = "./photos/Nabeel/" + media.image;
+          galleryUrl = `./photos/Nabeel/${media.image}`;
         } else if (media.photographerId === 925) {
-          galleryUrl = "./photos/Rhode/" + media.image;
+          galleryUrl = `./photos/Rhode/${media.image}`;
         } else if (media.photographerId === 195) {
-          galleryUrl = "./photos/Marcel/" + media.image;
+          galleryUrl = `./photos/Marcel/${media.image}`;
         }
       } else {
-        galleryUrl = "./photos/miniature/video.jpg";
+        galleryUrl = './photos/miniature/video.jpg';
       }
-      card.setAttribute("class", "cardGallery");
-      card.innerHTML =
-        '<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">' +
-        media.title +
-        '</h3><div class="cardGallery__body"><p class="cardGallery__price">' +
-        media.price +
-        ' €</p><p class="cardGallery__likes" id="#' +
-        media.id +
-        '">' +
-        media.likes +
-        '</p><a href="#' +
-        media.id +
-        '" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>';
+      card.setAttribute('class', 'cardGallery');
+      card.innerHTML = `<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">${
+        media.title
+      }</h3><div class="cardGallery__body"><p class="cardGallery__price">${
+        media.price
+      } €</p><p class="cardGallery__likes" id="#${
+        media.id
+      }">${
+        media.likes
+      }</p><a href="#${
+        media.id
+      }" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>`;
       this.LoadImage(card, galleryUrl, media, idx);
       this.cards.push(card);
     });
-    const gallery = document.querySelector("#js-container");
+    const gallery = document.querySelector('#js-container');
     this.cards.forEach((card) => {
       gallery.appendChild(card);
     });
   }
 
+  /**
+   * New position HTMLElements in DOM
+   * @param {HTMLElement} gallery
+   */
   ChangeGallery(gallery) {
     gallery.forEach((media, i) => {
       this.cards[i].dataset.order = i;
@@ -155,26 +186,32 @@ class PhotographerProfile {
     });
   }
 
+  /**
+   * Change the order of the elements
+   * @param {array} array
+   * @param {string} text
+   * @returns
+   */
   sortMedias(array, text) {
-    if (text === "init") {
+    if (text === 'init') {
       return array.sort((a, b) => {
         a = a.likes;
         b = b.likes;
         return b > a ? 1 : -1;
       });
-    } else if (text === "popularity") {
+    } if (text === 'popularity') {
       return array.sort((a, b) => {
         a = a.dataset.likes;
         b = b.dataset.likes;
         return b > a ? 1 : -1;
       });
-    } else if (text === "date") {
+    } if (text === 'date') {
       return array.sort((a, b) => {
         a = new Date(a.dataset.date);
         b = new Date(b.dataset.date);
         return a > b ? 1 : -1;
       });
-    } else if (text === "title") {
+    } if (text === 'title') {
       return array.sort((a, b) => {
         a = a.dataset.title;
         b = b.dataset.title;
@@ -183,20 +220,32 @@ class PhotographerProfile {
     }
   }
 
+  /**
+   * Initialize variables
+   */
   flipInit() {
-    (this.duration = 500), (this.positions = {});
+    this.duration = 500;
+    this.positions = {};
   }
 
+  /**
+   * Calculate the position of all elements
+   * @param {HTMLElements} elements
+   */
   flipRead(elements) {
     elements.forEach((element) => {
-      const id = element.getAttribute("id");
+      const id = element.getAttribute('id');
       this.positions[id] = element.getBoundingClientRect();
     });
   }
 
+  /**
+   * Calculate the arrival position of all the elements and playing animation
+   * @param {HTMLElements} elements
+   */
   flipPlay(elements) {
     elements.forEach((element) => {
-      const id = element.getAttribute("id");
+      const id = element.getAttribute('id');
       const newPosition = element.getBoundingClientRect();
       const oldPosition = this.positions[id];
       const deltaX = oldPosition.x - newPosition.x;
@@ -204,19 +253,19 @@ class PhotographerProfile {
       element.animate(
         [
           {
-            transform: "translate(" + deltaX + "px, " + deltaY + "px)",
+            transform: `translate(${deltaX}px, ${deltaY}px)`,
           },
           {
-            transform: "none",
+            transform: 'none',
           },
         ],
         {
           duration: this.duration,
-          easing: "ease-in-out",
-          fill: "both",
-        }
+          easing: 'ease-in-out',
+          fill: 'both',
+        },
       );
-      element.style.transform = "translate(" + deltaX + "px, " + deltaY + "px)";
+      element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
     });
   }
 }

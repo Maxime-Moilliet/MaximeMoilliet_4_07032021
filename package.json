@@ -18,5 +18,11 @@
   "homepage": "https://github.com/Maxime-Moilliet/MaximeMoilliet_4_07032021#readme",
   "dependencies": {
     "sass": "^1.32.8"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
