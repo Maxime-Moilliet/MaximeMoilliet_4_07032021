@@ -111,6 +111,14 @@ class Lightbox {
       container.appendChild(videoPlayer);
       videoPlayer.appendChild(source);
       container.appendChild(title);
+      // const videoPlayer = document.createElement('iframe');
+      // videoPlayer.setAttribute('src', 'https://www.youtube.com/embed/5AE9lZSoCf8');
+      // videoPlayer.setAttribute('title', 'chevaux');
+      // videoPlayer.setAttribute('width', '1200px');
+      // videoPlayer.setAttribute('height', '600px');
+      // videoPlayer.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      // videoPlayer.setAttribute('allowfullscreen', '')
+      // container.appendChild(videoPlayer);
       this.url = url;
       this.title = titleValue;
       this.alt = alt;
