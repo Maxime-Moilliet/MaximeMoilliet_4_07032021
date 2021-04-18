@@ -1,8 +1,8 @@
-import {
-  enableBodyScroll,
-  disableBodyScroll,
-} from './libs/body-scroll-lock.js';
+// eslint-disable-next-line import/extensions
+import { enableBodyScroll, disableBodyScroll } from './libs/body-scroll-lock.js';
 
+/* eslint max-len: ["error", { "code": 110 }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["inputError", "inputValid", "validate"] }] */
 class Modal {
   /**
    * Initialization Modal
@@ -19,6 +19,7 @@ class Modal {
    * @param {string} id
    */
   initModal(id) {
+    // eslint-disable-next-line eqeqeq
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
     const name = document.querySelector('.modal__title');
     name.innerHTML = `Contactez-moi <br/>${photographer[0].name}`;
@@ -27,6 +28,7 @@ class Modal {
     btns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         this.openModal(e, modal);
+        // eslint-disable-next-line no-shadow
         window.addEventListener('keyup', (e) => {
           if (e.key === 'Esc' || e.key === 'Escape') {
             if (this.element.getAttribute('aria-hidden') === 'false') {
@@ -57,10 +59,15 @@ class Modal {
       document.getElementById('js-form').style.display = 'none';
       document.getElementById('modalTitle').style.display = 'none';
       document.querySelector('.modal__formValid').style.display = 'block';
+      // eslint-disable-next-line no-console
       console.log(`Nom du photographe : ${photographer[0].name}`);
+      // eslint-disable-next-line no-console
       console.log(`input prénom : ${inputs[0].value}`);
+      // eslint-disable-next-line no-console
       console.log(`input nom : ${inputs[1].value}`);
+      // eslint-disable-next-line no-console
       console.log(`input mail : ${inputs[2].value}`);
+      // eslint-disable-next-line no-console
       console.log(`input textarea : ${inputs[3].value}`);
     });
   }
@@ -195,10 +202,9 @@ class Modal {
    * @returns error
    */
   inputError(input, text) {
-    return (
-      (input.parentNode.dataset.error = text),
-      (input.parentNode.dataset.errorVisible = 'true')
-    );
+    const inputError = input;
+    inputError.parentNode.dataset.error = text;
+    inputError.parentNode.dataset.errorVisible = 'true';
   }
 
   /**
@@ -207,10 +213,9 @@ class Modal {
    * @returns
    */
   inputValid(input) {
-    return (
-      (input.parentNode.dataset.error = ''),
-      (input.parentNode.dataset.errorVisible = 'false')
-    );
+    const inputValid = input;
+    inputValid.parentNode.dataset.error = '';
+    inputValid.parentNode.dataset.errorVisible = 'false';
   }
 
   /**

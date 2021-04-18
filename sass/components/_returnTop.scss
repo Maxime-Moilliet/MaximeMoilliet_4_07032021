@@ -8,18 +8,15 @@
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
-
-    & p {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #000;
-        opacity: 1;
-        transition: opacity .3s;
-
-        &:hover {
-            opacity: .7;
-        }
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000;
+    opacity: 1;
+    transition: opacity .3s;
+    &:hover {
+        opacity: .7;
     }
+    
 
     @media only screen and (min-width: 400px) {
         & {

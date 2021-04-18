@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["addLike", "buildInfo"] }] */
 class Likes {
   /**
    * listen to the click on button like
@@ -26,12 +27,14 @@ class Likes {
    */
   addLike(e, bdd, likeId) {
     e.preventDefault();
+    // eslint-disable-next-line eqeqeq
     const like = bdd.media.filter((el) => el.id == likeId);
     like[0].likes += 1;
     const countLikes = document.querySelectorAll('.cardGallery__likes');
     const countLikeId = [];
     countLikes.forEach((countLike) => {
       const countLikeID = countLike.getAttribute('id');
+      /* eslint radix: ["error", "as-needed"] */
       countLikeId.push(parseInt(countLikeID.slice(1)));
     });
     const countLike = countLikeId.filter(
@@ -48,7 +51,9 @@ class Likes {
    * @param {boolean} IsLiked
    */
   buildInfo(bdd, id, IsLiked) {
+    // eslint-disable-next-line eqeqeq
     const photographer = bdd.photographers.filter((el) => el.id == id);
+    // eslint-disable-next-line eqeqeq
     const medias = bdd.media.filter((el) => el.photographerId == id);
     let likes = null;
     medias.forEach((media) => {

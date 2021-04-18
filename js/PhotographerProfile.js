@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["buildBanner", "sortMedias"] }] */
 class PhotographerProfile {
   /**
    * on click Initialize filterOption
@@ -7,11 +8,10 @@ class PhotographerProfile {
   constructor(bdd, id) {
     this.bdd = bdd;
     const select = document.querySelectorAll('#js-filter');
-    select.forEach((option) => {
-      addEventListener('click', () => {
-        this.filterOption(option.value);
-      });
-    });
+    // eslint-disable-next-line no-restricted-globals
+    select.forEach((option) => addEventListener('click', () => {
+      this.filterOption(option.value);
+    }));
     this.filterBdd(id);
   }
 
@@ -20,7 +20,9 @@ class PhotographerProfile {
    * @param {integer} id
    */
   filterBdd(id) {
+    // eslint-disable-next-line eqeqeq
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
+    // eslint-disable-next-line eqeqeq
     const medias = this.bdd.media.filter((el) => el.photographerId == id);
     this.sortMedias(medias, 'init');
     this.buildBanner(photographer);
@@ -194,29 +196,13 @@ class PhotographerProfile {
    */
   sortMedias(array, text) {
     if (text === 'init') {
-      return array.sort((a, b) => {
-        a = a.likes;
-        b = b.likes;
-        return b > a ? 1 : -1;
-      });
+      array.sort((a, b) => (b.likes > a.likes ? 1 : -1));
     } if (text === 'popularity') {
-      return array.sort((a, b) => {
-        a = a.dataset.likes;
-        b = b.dataset.likes;
-        return b > a ? 1 : -1;
-      });
+      array.sort((a, b) => (b.dataset.likes > a.dataset.likes ? 1 : -1));
     } if (text === 'date') {
-      return array.sort((a, b) => {
-        a = new Date(a.dataset.date);
-        b = new Date(b.dataset.date);
-        return a > b ? 1 : -1;
-      });
+      array.sort((a, b) => (new Date(a.dataset.date) > new Date(b.dataset.date) ? 1 : -1));
     } if (text === 'title') {
-      return array.sort((a, b) => {
-        a = a.dataset.title;
-        b = b.dataset.title;
-        return a > b ? 1 : -1;
-      });
+      array.sort((a, b) => (a.dataset.title > b.dataset.title ? 1 : -1));
     }
   }
 
@@ -265,6 +251,7 @@ class PhotographerProfile {
           fill: 'both',
         },
       );
+      // eslint-disable-next-line no-param-reassign
       element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
     });
   }

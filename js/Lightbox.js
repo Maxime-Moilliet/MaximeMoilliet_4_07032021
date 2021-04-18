@@ -1,7 +1,5 @@
-import {
-  enableBodyScroll,
-  disableBodyScroll,
-} from './libs/body-scroll-lock.js';
+// eslint-disable-next-line import/extensions
+import { enableBodyScroll, disableBodyScroll } from './libs/body-scroll-lock.js';
 
 class Lightbox {
   /**
@@ -14,14 +12,10 @@ class Lightbox {
     images.forEach((image) => {
       image.addEventListener('click', (e) => {
         const images2 = Array.from(document.querySelectorAll('#js-galleryImg'));
-        images2.sort((a, b) => {
-          a = a.dataset.order;
-          b = b.dataset.order;
-          return a > b ? 1 : -1;
-        });
-        const galleryAlts = images2.map((image) => image.dataset.alt);
-        const galleryImages = images2.map((image) => image.getAttribute('src'));
-        const galleryTitles = images2.map((image) => image.dataset.title);
+        images2.sort((a, b) => (a.dataset.order > b.dataset.order ? 1 : -1));
+        const galleryAlts = images2.map((img) => img.dataset.alt);
+        const galleryImages = images2.map((img) => img.getAttribute('src'));
+        const galleryTitles = images2.map((img) => img.dataset.title);
         this.InitLightbox(
           e.currentTarget.getAttribute('src'),
           e.currentTarget.getAttribute('alt'),
@@ -49,6 +43,7 @@ class Lightbox {
     const titleValue = this.bdd.media.filter((el) => el.alt === alt)[0].title;
     const { photographerId } = this.bdd.media.filter((el) => el.alt === alt)[0];
     this.videoPath = null;
+    /* eslint max-len: ["error", { "code": 140 }] */
     const { video } = this.bdd.media.filter((el) => el.photographerId === photographerId && el.image === undefined)[0];
     if (photographerId === 82) {
       this.videoPath = `/photos/Tracy/${video}`;
@@ -132,6 +127,7 @@ class Lightbox {
   buildLightbox() {
     const dom = document.createElement('aside');
     dom.classList.add('lightbox');
+    /* eslint max-len: ["error", { "code": 260 }] */
     dom.innerHTML = '<i class=\'fas fa-chevron-left lightbox__prev\'></i><div class=\'lightbox__center\'><div class=\'lightbox__container\'></div><i class=\'fas fa-times lightbox__close\'></i></div><i class=\'fas fa-chevron-right lightbox__next\'></i>';
     dom
       .querySelector('.lightbox__close')

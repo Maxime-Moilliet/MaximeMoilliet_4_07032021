@@ -4,14 +4,18 @@ if (typeof window !== 'undefined') {
     get passive() {
       hasPassiveEvents = true;
       return undefined;
-    }
+    },
   };
   window.addEventListener('testPassive', null, passiveTestOptions);
   window.removeEventListener('testPassive', null, passiveTestOptions);
 }
 
-const isIosDevice = typeof window !== 'undefined' && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
-
+// eslint-disable-next-line no-mixed-operators
+const isIosDevice = typeof window !== 'undefined' && window.navigator && window.navigator.platform
+// eslint-disable-next-line no-mixed-operators
+&& (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === 'MacIntel'
+// eslint-disable-next-line no-mixed-operators
+&& window.navigator.maxTouchPoints > 1);
 
 let locks = [];
 let documentListenerAdded = false;
@@ -20,7 +24,7 @@ let previousBodyOverflowSetting;
 let previousBodyPaddingRight;
 
 // returns true if `el` should be allowed to receive touchmove events.
-const allowTouchMove = el => locks.some(lock => {
+const allowTouchMove = (el) => locks.some((lock) => {
   if (lock.options.allowTouchMove && lock.options.allowTouchMove(el)) {
     return true;
   }
@@ -28,7 +32,7 @@ const allowTouchMove = el => locks.some(lock => {
   return false;
 });
 
-const preventDefault = rawEvent => {
+const preventDefault = (rawEvent) => {
   const e = rawEvent || window.event;
 
   // For the case whereby consumers adds a touchmove event listener to document.
@@ -39,6 +43,7 @@ const preventDefault = rawEvent => {
     return true;
   }
 
+  /* eslint max-len: ["error", { "code": 130 }] */
   // Do not prevent if the event has more than one touch (usually meaning this is a multi touch gesture like pinch to zoom).
   if (e.touches.length > 1) return true;
 
@@ -47,7 +52,7 @@ const preventDefault = rawEvent => {
   return false;
 };
 
-const setOverflowHidden = options => {
+const setOverflowHidden = (options) => {
   // If previousBodyPaddingRight is already set, don't set it again.
   if (previousBodyPaddingRight === undefined) {
     const reserveScrollBarGap = !!options && options.reserveScrollBarGap === true;
@@ -84,8 +89,9 @@ const restoreOverflowSetting = () => {
   }
 };
 
+/* eslint max-len: ["error", { "code": 170 }] */
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight#Problems_and_solutions
-const isTargetElementTotallyScrolled = targetElement => targetElement ? targetElement.scrollHeight - targetElement.scrollTop <= targetElement.clientHeight : false;
+const isTargetElementTotallyScrolled = (targetElement) => (targetElement ? targetElement.scrollHeight - targetElement.scrollTop <= targetElement.clientHeight : false);
 
 const handleScroll = (event, targetElement) => {
   const clientY = event.targetTouches[0].clientY - initialClientY;
@@ -117,25 +123,27 @@ export const disableBodyScroll = (targetElement, options) => {
   }
 
   // disableBodyScroll must not have been called on this targetElement before
-  if (locks.some(lock => lock.targetElement === targetElement)) {
+  if (locks.some((lock) => lock.targetElement === targetElement)) {
     return;
   }
 
   const lock = {
     targetElement,
-    options: options || {}
+    options: options || {},
   };
 
   locks = [...locks, lock];
 
   if (isIosDevice) {
-    targetElement.ontouchstart = event => {
+    // eslint-disable-next-line no-param-reassign
+    targetElement.ontouchstart = (event) => {
       if (event.targetTouches.length === 1) {
         // detect single touch.
         initialClientY = event.targetTouches[0].clientY;
       }
     };
-    targetElement.ontouchmove = event => {
+    // eslint-disable-next-line no-param-reassign
+    targetElement.ontouchmove = (event) => {
       if (event.targetTouches.length === 1) {
         // detect single touch.
         handleScroll(event, targetElement);
@@ -154,8 +162,10 @@ export const disableBodyScroll = (targetElement, options) => {
 export const clearAllBodyScrollLocks = () => {
   if (isIosDevice) {
     // Clear all locks ontouchstart/ontouchmove handlers, and the references.
-    locks.forEach(lock => {
+    locks.forEach((lock) => {
+      // eslint-disable-next-line no-param-reassign
       lock.targetElement.ontouchstart = null;
+      // eslint-disable-next-line no-param-reassign
       lock.targetElement.ontouchmove = null;
     });
 
@@ -173,17 +183,19 @@ export const clearAllBodyScrollLocks = () => {
   locks = [];
 };
 
-export const enableBodyScroll = targetElement => {
+export const enableBodyScroll = (targetElement) => {
   if (!targetElement) {
     // eslint-disable-next-line no-console
     console.error('enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.');
     return;
   }
-
-  locks = locks.filter(lock => lock.targetElement !== targetElement);
+  // eslint-disable-next-line no-param-reassign
+  locks = locks.filter((lock) => lock.targetElement !== targetElement);
 
   if (isIosDevice) {
+    // eslint-disable-next-line no-param-reassign
     targetElement.ontouchstart = null;
+    // eslint-disable-next-line no-param-reassign
     targetElement.ontouchmove = null;
 
     if (documentListenerAdded && locks.length === 0) {

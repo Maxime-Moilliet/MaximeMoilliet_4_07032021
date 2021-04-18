@@ -21,7 +21,7 @@ class PhotographerAccueil {
     } else {
       this.toggleClass([]);
     }
-    const tags = document.querySelectorAll('#js-tags');
+    const tags = document.querySelectorAll('.tag__item');
     tags.forEach((tag) => {
       tag.addEventListener('click', this.tagClicked.bind(this));
     });
@@ -60,7 +60,7 @@ class PhotographerAccueil {
    * @param {array} tagExist
    */
   toggleClass(tagExist) {
-    const tags = Array.from(document.querySelectorAll('#js-tags'));
+    const tags = Array.from(document.querySelectorAll('.tag__item'));
     tags.forEach((tag) => {
       if (tagExist.includes(tag.dataset.name)) {
         tag.classList.add('active');
@@ -77,12 +77,13 @@ class PhotographerAccueil {
    */
   filterPhotographer(tagExist) {
     const photographersExist = this.bdd.photographers.filter((photographer) => {
+      /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
       for (let i = 0; i < tagExist.length; i++) {
         if (!photographer.tags.includes(tagExist[i])) return false;
       }
       return true;
     });
-    const cards = document.querySelectorAll('#js-card');
+    const cards = document.querySelectorAll('.cardPhotographer');
     const container = document.querySelector('.main__container');
     if (cards.length > 0) {
       cards.forEach((card) => {
@@ -106,13 +107,13 @@ class PhotographerAccueil {
    * @param {array} tagExist
    */
   buildCard(photographersExist, tagExist) {
-    photographersExist.innerHTML = '';
+    const photographersExists = photographersExist;
+    photographersExists.innerHTML = '';
     const container = document.querySelector('.main__container');
     this.isBuild = true;
-    photographersExist.forEach((photographer) => {
+    photographersExists.forEach((photographer) => {
       const card = document.createElement('article');
       card.setAttribute('class', 'cardPhotographer');
-      card.setAttribute('id', 'js-card');
       card.innerHTML = `<a href="/MaximeMoilliet_4_07032021/photographer-profile?id=${photographer.id}">
           <img class="cardPhotographer__img" src="./photos/PhotographersIDPhotos/${photographer.portrait}"
               alt="${photographer.alt}">

@@ -1,178 +1,113 @@
-crear_select();
-
 function isMobileDevice() {
   return (
-    typeof window.orientation !== "undefined" ||
-    navigator.userAgent.indexOf("IEMobile") !== -1
+    typeof window.orientation !== 'undefined'
+    || navigator.userAgent.indexOf('IEMobile') !== -1
   );
 }
 
-function crear_select() {
-  let li = new Array();
-  let div_cont_select = document.querySelectorAll(
-    "[data-mate-select='active']"
+function crearSelect() {
+  const li = [];
+  const divContSelect = document.querySelectorAll(
+    "[data-mate-select='active']",
   );
-  let select_ = "";
-  for (let e = 0; e < div_cont_select.length; e++) {
-    div_cont_select[e].setAttribute("data-indx-select", e);
-    div_cont_select[e].setAttribute("data-selec-open", "false");
-    let ul_cont = document.querySelectorAll(
-      "[data-indx-select='" + e + "'] > .cont_list_select_mate > ul"
-    );
-    select_ = document.querySelectorAll(
-      "[data-indx-select='" + e + "'] >select"
-    )[0];
+  let select = '';
+  /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
+  for (let e = 0; e < divContSelect.length; e++) {
+    divContSelect[e].setAttribute('data-indx-select', e);
+    divContSelect[e].setAttribute('data-selec-open', 'false');
+    const ulCount = document.querySelectorAll(`[data-indx-select='${e}'] > .cont_list_select_mate > ul`);
+    /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
+    select = document.querySelectorAll(`[data-indx-select='${e}'] >select`)[0];
     if (isMobileDevice()) {
-      select_.addEventListener("change", function () {
-        _select_option(select_.selectedIndex, e);
+      // eslint-disable-next-line no-loop-func
+      select.addEventListener('change', () => {
+        /* eslint no-use-before-define: ["error", { "functions": false }] */
+        selectOption(select.selectedIndex, e);
       });
     }
-    let select_optiones = select_.options;
-    document
-      .querySelectorAll(
-        "[data-indx-select='" + e + "']  > .select__option "
-      )[0]
-      .setAttribute("data-n-select", e);
-    document
-      .querySelectorAll(
-        "[data-indx-select='" + e + "']  > .icon_select_mate "
-      )[0]
-      .setAttribute("data-n-select", e);
-    for (let i = 0; i < select_optiones.length; i++) {
-      li[i] = document.createElement("li");
-      if (
-        select_optiones[i].selected == true ||
-        select_.value == select_optiones[i].innerHTML
-      ) {
-        li[i].className = "active";
-        document.querySelector(
-          "[data-indx-select='" + e + "']  > .select__option "
-        ).innerHTML = select_optiones[i].innerHTML;
+    const selectOptions = select.options;
+    document.querySelectorAll(`[data-indx-select='${e}']  > .select__option `)[0].setAttribute('data-n-select', e);
+    document.querySelectorAll(`[data-indx-select='${e}']  > .icon_select_mate `)[0].setAttribute('data-n-select', e);
+    for (let i = 0; i < selectOptions.length; i++) {
+      li[i] = document.createElement('li');
+      if (selectOptions[i].selected === true || select.value === selectOptions[i].innerHTML) {
+        li[i].className = 'active';
+        document.querySelector(`[data-indx-select='${e}']  > .select__option `).innerHTML = selectOptions[i].innerHTML;
       }
-      li[i].setAttribute("data-index", i);
-      li[i].setAttribute("data-selec-index", e);
-      li[i].setAttribute("id", "js-option")
-
-      li[i].addEventListener("click", function () {
-        _select_option(
-          this.getAttribute("data-index"),
-          this.getAttribute("data-selec-index")
+      li[i].setAttribute('data-index', i);
+      li[i].setAttribute('data-selec-index', e);
+      li[i].setAttribute('id', 'js-option');
+      /* eslint func-names: ["error", "never"] */
+      li[i].addEventListener('click', function () {
+        selectOption(
+          this.getAttribute('data-index'),
+          this.getAttribute('data-selec-index'),
         );
       });
-
-      li[i].innerHTML = select_optiones[i].innerHTML;
-      ul_cont[0].appendChild(li[i]);
+      li[i].innerHTML = selectOptions[i].innerHTML;
+      ulCount[0].appendChild(li[i]);
     }
   }
 }
 
-let cont_slc = 0;
-function open_select(idx) {
-  let idx1 = idx.getAttribute("data-n-select");
-  let ul_cont_li = document.querySelectorAll(
-    "[data-indx-select='" + idx1 + "'] .cont_select_int > li"
-  );
+// eslint-disable-next-line no-unused-vars
+function openSelect(idx) {
+  const idx1 = idx.getAttribute('data-n-select');
+  const ulContLi = document.querySelectorAll(`[data-indx-select='${idx1}'] .cont_select_int > li`);
   let hg = 0;
-  let slect_open = document
-    .querySelectorAll("[data-indx-select='" + idx1 + "']")[0]
-    .getAttribute("data-selec-open");
-  let slect_element_open = document.querySelectorAll(
-    "[data-indx-select='" + idx1 + "'] select"
-  )[0];
+  const slectOpen = document.querySelectorAll(`[data-indx-select='${idx1}']`)[0].getAttribute('data-selec-open');
+  const slectElementOpen = document.querySelectorAll(`[data-indx-select='${idx1}'] select`)[0];
   if (isMobileDevice()) {
     if (window.document.createEvent) {
-      let evt = window.document.createEvent("MouseEvents");
-      evt.initMouseEvent(
-        "mousedown",
-        false,
-        true,
-        window,
-        0,
-        0,
-        0,
-        0,
-        0,
-        false,
-        false,
-        false,
-        false,
-        0,
-        null
-      );
-      slect_element_open.dispatchEvent(evt);
-    } else if (slect_element_open.fireEvent) {
-      slect_element_open.fireEvent("onmousedown");
+      const evt = window.document.createEvent('MouseEvents');
+      evt.initMouseEvent('mousedown', false, true, window, 0, 0, 0, 0, 0, false, false, false, 0, null);
+      slectElementOpen.dispatchEvent(evt);
+    } else if (slectElementOpen.fireEvent) {
+      slectElementOpen.fireEvent('onmousedown');
     } else {
-      slect_element_open.click();
+      slectElementOpen.click();
     }
   } else {
-    for (let i = 0; i < ul_cont_li.length; i++) {
-      hg += ul_cont_li[i].offsetHeight;
+    for (let i = 0; i < ulContLi.length; i++) {
+      hg += ulContLi[i].offsetHeight;
     }
-    if (slect_open == "false") {
-      document
-        .querySelectorAll("[data-indx-select='" + idx1 + "']")[0]
-        .setAttribute("data-selec-open", "true");
-      document.querySelectorAll(
-        "[data-indx-select='" + idx1 + "'] > .cont_list_select_mate > ul"
-      )[0].style.height = hg + "px";
-      document.querySelectorAll(
-        "[data-indx-select='" + idx1 + "'] > .icon_select_mate"
-      )[0].style.transform = "rotate(0deg)";
+    if (slectOpen === 'false') {
+      document.querySelectorAll(`[data-indx-select='${idx1}']`)[0].setAttribute('data-selec-open', 'true');
+      document.querySelectorAll(`[data-indx-select='${idx1}'] > .cont_list_select_mate > ul`)[0].style.height = `${hg}px`;
+      document.querySelectorAll(`[data-indx-select='${idx1}'] > .icon_select_mate`)[0].style.transform = 'rotate(0deg)';
     } else {
-      document
-        .querySelectorAll("[data-indx-select='" + idx1 + "']")[0]
-        .setAttribute("data-selec-open", "false");
-      document.querySelectorAll(
-        "[data-indx-select='" + idx1 + "'] > .icon_select_mate"
-      )[0].style.transform = "rotate(180deg)";
-      document.querySelectorAll(
-        "[data-indx-select='" + idx1 + "'] > .cont_list_select_mate > ul"
-      )[0].style.height = "0px";
+      document.querySelectorAll(`[data-indx-select='${idx1}']`)[0].setAttribute('data-selec-open', 'false');
+      document.querySelectorAll(`[data-indx-select='${idx1}'] > .icon_select_mate`)[0].style.transform = 'rotate(180deg)';
+      document.querySelectorAll(`[data-indx-select='${idx1}'] > .cont_list_select_mate > ul`)[0].style.height = '0px';
     }
   }
 }
 
-function salir_select(indx) {
-  let select_ = document.querySelectorAll(
-    "[data-indx-select='" + indx + "'] > select"
-  )[0];
-  document.querySelectorAll(
-    "[data-indx-select='" + indx + "'] > .cont_list_select_mate > ul"
-  )[0].style.height = "0px";
-  document.querySelector(
-    "[data-indx-select='" + indx + "'] > .icon_select_mate"
-  ).style.transform = "rotate(180deg)";
-  document
-    .querySelectorAll("[data-indx-select='" + indx + "']")[0]
-    .setAttribute("data-selec-open", "false");
+function salirSelect(indx) {
+  document.querySelectorAll(`[data-indx-select='${indx}'] > .cont_list_select_mate > ul`)[0].style.height = '0px';
+  document.querySelector(`[data-indx-select='${indx}'] > .icon_select_mate`).style.transform = 'rotate(180deg)';
+  document.querySelectorAll(`[data-indx-select='${indx}']`)[0].setAttribute('data-selec-open', 'false');
 }
 
-function _select_option(indx, selc) {
+function selectOption(indx, selc) {
+  let selc2 = selc;
   if (isMobileDevice()) {
-    selc = selc - 1;
+    selc2 -= 1;
   }
-  let select_ = document.querySelectorAll(
-    "[data-indx-select='" + selc + "'] > select"
-  )[0];
-
-  let li_s = document.querySelectorAll(
-    "[data-indx-select='" + selc + "'] .cont_select_int > li"
-  );
-  let p_act = (document.querySelectorAll(
-    "[data-indx-select='" + selc + "'] > .select__option"
-  )[0].innerHTML = li_s[indx].innerHTML);
-  let select_optiones = document.querySelectorAll(
-    "[data-indx-select='" + selc + "'] > select > option"
-  );
-  for (let i = 0; i < li_s.length; i++) {
-    if (li_s[i].className == "active") {
-      li_s[i].className = "";
+  const select = document.querySelectorAll(`[data-indx-select='${selc2}'] > select`)[0];
+  const liS = document.querySelectorAll(`[data-indx-select='${selc2}'] .cont_select_int > li`);
+  document.querySelectorAll(`[data-indx-select='${selc2}'] > .select__option`)[0].innerHTML = liS[indx].innerHTML;
+  const selectOptions = document.querySelectorAll(`[data-indx-select='${selc2}'] > select > option`);
+  for (let i = 0; i < liS.length; i++) {
+    if (liS[i].className === 'active') {
+      liS[i].className = '';
     }
-    li_s[indx].className = "active";
+    liS[indx].className = 'active';
   }
-  select_optiones[indx].selected = true;
-  select_.selectedIndex = indx;
-  select_.onchange();
-  salir_select(selc);
+  selectOptions[indx].selected = true;
+  select.selectedIndex = indx;
+  select.onchange();
+  salirSelect(selc2);
 }
+
+crearSelect();

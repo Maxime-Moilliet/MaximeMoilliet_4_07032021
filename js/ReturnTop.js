@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["BuildReturnTop"] }] */
 class ReturnTop {
   /**
    * lisen scroll on body

@@ -1,9 +1,16 @@
+// eslint-disable-next-line import/extensions
 import { bdd } from './bdd.js';
+// eslint-disable-next-line import/extensions
 import { PhotographerProfile } from './PhotographerProfile.js';
+// eslint-disable-next-line import/extensions
 import { Lightbox } from './Lightbox.js';
+// eslint-disable-next-line import/extensions
 import { Modal } from './Modal.js';
+// eslint-disable-next-line import/extensions
 import { Likes } from './Likes.js';
+// eslint-disable-next-line import/extensions
 import { PhotographerAccueil } from './PhotographerAccueil.js';
+// eslint-disable-next-line import/extensions
 import { ReturnTop } from './ReturnTop.js';
 
 class Factory {
@@ -34,6 +41,7 @@ if (root.pathname === '/photographer-profile.html' || root.pathname === '/Maxime
   let id = null;
   let idIsValid = false;
   bdd.photographers.forEach((photographer) => {
+    /* eslint radix: ["error", "as-needed"] */
     if (photographer.id === parseInt(url.get('id'))) {
       idIsValid = true;
     }
