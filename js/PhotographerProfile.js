@@ -165,7 +165,7 @@ class PhotographerProfile {
         media.likes
       }</p><a href="#${
         media.id
-      }" class="cardGallery__like"><i class="fas fa-heart cardGallery__icon" aria-label="likes"></i></a></div></div>`;
+      }" class="cardGallery__like"><em class="fas fa-heart cardGallery__icon" aria-label="likes"></em></a></div></div>`;
       this.LoadImage(card, galleryUrl, media, idx);
       this.cards.push(card);
     });

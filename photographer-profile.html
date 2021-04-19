@@ -21,7 +21,7 @@
     <section class="banner" aria-label="hero banner">
         <div class="banner__left">
             <div class="banner__header">
-                <h1 class="banner__title"></h1>
+                <h2 class="banner__title"></h2>
                 <button class="banner__btn btn btn-modal">Contactez-moi</button>
             </div>
             <div class="banner__body">
@@ -38,10 +38,14 @@
         <p class="filter__p">Trier par</p>
         <div class="cont_select_center">
             <div class="select_mate" data-mate-select="active">
+                <label for="js-filter">Filtre</label>
                 <select name="filter" id="js-filter">
-                    <option value="0">Popularité</option>
-                    <option value="1">Date</option>
-                    <option value="2">Titre</option>
+                    <label for="popularity">Popularité</label>
+                    <option id="popularity" value="0">Popularité</option>
+                    <label for="date">Date</label>
+                    <option id="date" value="1">Date</option>
+                    <label for="title">Titre</label>
+                    <option id="title" value="2">Titre</option>
                 </select>
                 <p class="select__option" onclick="openSelect(this)"></p><span onclick="openSelect(this)"
                     class="icon_select_mate"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"
@@ -76,7 +80,7 @@
         <div id="js-modalContainer" class="modal__container">
             <div class="modal__header">
                 <h1 id="modalTitle" class="modal__title">Contactez-moi <br> Mimi Keel</h1>
-                <i id="js-modalClose" class="fas fa-times modal__close"></i>
+                <em id="js-modalClose" class="fas fa-times modal__close"></em>
             </div>
             <form id="js-form" action="#" class="modal__form">
                 <div class="modal__group">
@@ -101,7 +105,7 @@
             </form>
             <div class="modal__formValid">
                 <h2>Votre message à été envoyé</h2>
-                <i class="far fa-paper-plane"></i>
+                <em class="far fa-paper-plane"></em>
             </div>
         </div>
     </section>

@@ -64,7 +64,7 @@ class Likes {
     }
     const infoLikes = document.getElementById('js-infoLikes');
     const infoPrice = document.getElementById('js-infoPrice');
-    infoLikes.innerHTML = `${likes} <i class="fas fa-heart info__icon" aria-label="likes">`;
+    infoLikes.innerHTML = `${likes} <em class="fas fa-heart info__icon" aria-label="likes"></em>`;
     infoPrice.innerHTML = `${photographer[0].price}€ / jour`;
   }
 }
