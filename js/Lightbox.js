@@ -8,10 +8,10 @@ class Lightbox {
    */
   constructor(bdd) {
     this.bdd = bdd;
-    const images = Array.from(document.querySelectorAll('#js-galleryImg'));
+    const images = Array.from(document.querySelectorAll('.cardGallery__img'));
     images.forEach((image) => {
       image.addEventListener('click', (e) => {
-        const images2 = Array.from(document.querySelectorAll('#js-galleryImg'));
+        const images2 = Array.from(document.querySelectorAll('.cardGallery__img'));
         images2.sort((a, b) => (a.dataset.order > b.dataset.order ? 1 : -1));
         const galleryAlts = images2.map((img) => img.dataset.alt);
         const galleryImages = images2.map((img) => img.getAttribute('src'));

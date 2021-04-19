@@ -127,7 +127,7 @@ class PhotographerAccueil {
       const ul = card.querySelector('.cardPhotographer__tags');
       photographer.tags.forEach((tag) => {
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#"><span class="tag__item" id="js-tagLi" data-name="${tag}">#${tag}</sapn></a>`;
+        li.innerHTML = `<a href="#"><span class="tag__item" data-name="${tag}">#${tag}</sapn></a>`;
         tagExist.forEach((tags) => {
           if (tag === tags) {
             li.setAttribute('class', 'tag__item active');
@@ -137,7 +137,7 @@ class PhotographerAccueil {
       });
       container.appendChild(card);
     });
-    const tags = document.querySelectorAll('#js-tagLi');
+    const tags = document.querySelectorAll('.cardPhotographer__tags li a span');
     tags.forEach((tag) => {
       tag.addEventListener('click', this.tagClicked.bind(this));
     });

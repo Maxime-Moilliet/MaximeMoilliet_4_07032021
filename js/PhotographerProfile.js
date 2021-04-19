@@ -81,7 +81,6 @@ class PhotographerProfile {
       link.setAttribute('href', `/MaximeMoilliet_4_07032021/?tag=${el}`);
       const tag = document.createElement('span');
       tag.setAttribute('class', 'tag__item');
-      tag.setAttribute('id', 'js-tag');
       tag.innerHTML = `#${el}`;
 
       tagContainer.appendChild(li);
@@ -105,7 +104,6 @@ class PhotographerProfile {
     element.prepend(link);
     loader.classList.add('loader');
     image.src = urlImage;
-    image.setAttribute('id', 'js-galleryImg');
     image.setAttribute('class', 'cardGallery__img');
     image.setAttribute('alt', media.alt);
     image.setAttribute('data-order', idx);
@@ -157,7 +155,7 @@ class PhotographerProfile {
         galleryUrl = './photos/miniature/video.jpg';
       }
       card.setAttribute('class', 'cardGallery');
-      card.innerHTML = `<div class="cardGallery__content"><h3 id="js-title" class="cardGallery__title">${
+      card.innerHTML = `<div class="cardGallery__content"><h3 class="cardGallery__title">${
         media.title
       }</h3><div class="cardGallery__body"><p class="cardGallery__price">${
         media.price

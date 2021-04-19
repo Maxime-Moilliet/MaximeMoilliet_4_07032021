@@ -23,7 +23,7 @@ class Modal {
     const photographer = this.bdd.photographers.filter((el) => el.id == id);
     const name = document.querySelector('.modal__title');
     name.innerHTML = `Contactez-moi <br/>${photographer[0].name}`;
-    const btns = document.querySelectorAll('#js-modal');
+    const btns = document.querySelectorAll('.btn-modal');
     const modal = document.querySelector('.modal');
     btns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
@@ -38,7 +38,7 @@ class Modal {
         });
       });
     });
-    document.getElementById('js-submit').setAttribute('disabled', 'true');
+    document.getElementById('js-submit').setAttribute('disabled', '');
     const form = document.getElementById('js-form');
     const inputs = [
       document.getElementById('first'),

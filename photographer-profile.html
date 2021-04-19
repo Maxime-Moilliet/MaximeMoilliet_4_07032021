@@ -15,15 +15,14 @@
 
 <body>
     <header class="header">
-        <a href="/MaximeMoilliet_4_07032021/"><img class="header__logo" src="./photos/logo/logo.png"
-                alt="“Fisheye Home page"></a>
+        <a href="/MaximeMoilliet_4_07032021/"><img class="header__logo" src="./photos/logo/logo.png" alt="“Fisheye Home page"></a>
     </header>
 
     <section class="banner" aria-label="hero banner">
         <div class="banner__left">
             <div class="banner__header">
                 <h1 class="banner__title"></h1>
-                <button id="js-modal" class="banner__btn btn">Contactez-moi</button>
+                <button class="banner__btn btn btn-modal">Contactez-moi</button>
             </div>
             <div class="banner__body">
                 <p class="banner__location"></p>
@@ -39,7 +38,7 @@
         <p class="filter__p">Trier par</p>
         <div class="cont_select_center">
             <div class="select_mate" data-mate-select="active">
-                <select name="filter" onchange="" onclick="" id="js-filter">
+                <select name="filter" id="js-filter">
                     <option value="0">Popularité</option>
                     <option value="1">Date</option>
                     <option value="2">Titre</option>
@@ -64,15 +63,15 @@
     </main>
 
     <aside class="btn__contact">
-        <a id="js-modal" class="btn" href="#">Contactez-moi</a>
+        <a class="btn btn-modal" href="#">Contactez-moi</a>
     </aside>
 
     <aside class="info">
-        <p class="info__likes" id="js-infoLikes"></i></p>
+        <p class="info__likes" id="js-infoLikes"></p>
         <p class="info__price" id="js-infoPrice"></p>
     </aside>
 
-    <aside class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true" aria-modal="false"
+    <section class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true" aria-modal="false"
         style="display: none;">
         <div id="js-modalContainer" class="modal__container">
             <div class="modal__header">
@@ -104,9 +103,8 @@
                 <h2>Votre message à été envoyé</h2>
                 <i class="far fa-paper-plane"></i>
             </div>
-
         </div>
-    </aside>
+    </section>
 
     <script type="module" src="./js/Factory.js"></script>
 </body>
